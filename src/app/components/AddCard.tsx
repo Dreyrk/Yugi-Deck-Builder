@@ -1,9 +1,15 @@
+import { AddCardBtnProps } from "@/types";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
-export default function AddCard() {
+export default function AddCardBtn({ setIsOpen, isOpen }: AddCardBtnProps) {
   return (
-    <button type="submit" className="rounded-full bg-slate-300">
-      <BsFillPlusCircleFill size={60} />
-    </button>
+    <div className="h-[260px] w-[180px] grid place-content-center">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="rounded-full bg-slate-300">
+        <BsFillPlusCircleFill size={60} />
+      </button>
+    </div>
   );
 }

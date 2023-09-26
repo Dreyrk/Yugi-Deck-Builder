@@ -1,13 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import AddCard from "./AddCard";
 import YugiCard from "./YugiCard";
+import AddToDeckModal from "./AddToDeckModal";
 
 const testArray = Array.from({ length: 40 });
 
-const addCardToDeck = () => {};
-
 export default function MainDeck() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className="bg-yellow-900 mx-6 my-4 rounded-md border-4 border-orange-950">
+    <section className="bg-yellow-900 mx-8 my-4 rounded-md border-4 border-orange-950">
       <div className="grid grid-cols-4 lg:grid-cols-5 max-sm:grid-cols-2 place-items-center gap-6 p-4">
         {testArray.map((card, i) => (
           <YugiCard
@@ -15,10 +18,9 @@ export default function MainDeck() {
             src="https://images.ygoprodeck.com/images/cards/6983839.jpg"
           />
         ))}
-        <form action={addCardToDeck}>
-          <AddCard />
-        </form>
+        <AddCard isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
+      <AddToDeckModal />
     </section>
   );
 }
