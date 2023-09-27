@@ -6,7 +6,7 @@ export default function AddCardBtn({ setIsOpen, isOpen }: AddCardBtnProps) {
     <div className="h-[260px] w-[180px] grid place-content-center">
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(true)}
         className="rounded-full bg-slate-300">
         <BsFillPlusCircleFill size={60} />
       </button>

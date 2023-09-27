@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import AddCard from "./AddCard";
+import AddCardBtn from "./AddCardBtn";
 import YugiCard from "./YugiCard";
 import AddToDeckModal from "./AddToDeckModal";
 
@@ -18,9 +18,11 @@ export default function MainDeck() {
             src="https://images.ygoprodeck.com/images/cards/6983839.jpg"
           />
         ))}
-        <AddCard isOpen={isOpen} setIsOpen={setIsOpen} />
+        <AddCardBtn isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
-      <AddToDeckModal />
+      {isOpen && (
+        <AddToDeckModal isOpen={isOpen} setIsOpen={setIsOpen} deck="main" />
+      )}
     </section>
   );
 }

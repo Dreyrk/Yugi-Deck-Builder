@@ -18,7 +18,13 @@ export interface FooterLinks {
   href: string;
 }
 
-export interface AddCardBtnProps {
+interface isOpenStateProps {
   isOpen: boolean;
   setIsOpen: (s: boolean) => void;
+}
+
+export interface AddCardBtnProps extends isOpenStateProps {}
+
+export interface AddToDeckModalProps extends isOpenStateProps {
+  deck: string;
 }
