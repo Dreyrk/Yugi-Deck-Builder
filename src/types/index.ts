@@ -39,9 +39,9 @@ export interface AuthProps {
 export interface FormInputProps {
   id: string;
   label: string;
-  value: string;
-  setValue: () => void;
-  logo: IconType;
+  value: any;
+  setValue: (value: any) => void;
+  Logo: IconType;
   type: string;
 }
 
@@ -51,13 +51,4 @@ export interface User {
   pseudo?: string;
   email: string;
   password?: string;
-}
-
-export interface CustomJWT extends JWT {
-  user: User;
-}
-export interface CustomSession extends Session {
-  pseudo?: string;
-  email?: string;
-  user?: User;
 }

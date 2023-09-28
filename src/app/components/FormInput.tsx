@@ -9,27 +9,28 @@ export default function FormInput({
   label,
   value,
   setValue,
-  logo,
+  Logo,
   type,
 }: FormInputProps) {
   const [show, setShow] = useState(false);
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (id.includes("confirm")) {
       setValue(e.target.value);
     } else {
-      setValue((prev) => ({ ...prev, [id]: e.target.value }));
+      setValue((prev: any) => ({ ...prev, [id]: e.target.value as string }));
     }
   };
   return (
     <div className="flex">
       <div className="grid w-8 h-8 text-black border-2 place-content-center">
-        {logo}
+        {<Logo size={30} />}
       </div>
       <div className="relative">
         <input
           id={id}
           type={!show ? type : "text"}
           value={value}
+          name={id}
           onChange={onChange}
           className="w-full h-8 px-2 py-1 text-gray-900 placeholder-transparent border-b-2 border-gray-300 rounded-lg peer focus:outline-none focus:border-purple-600"
           autoComplete="off"

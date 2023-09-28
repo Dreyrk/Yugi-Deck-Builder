@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         try {
           await connect();
           const user = await Users.findOne({ email });
+          console.log(user);
 
           if (!user) {
             throw Error("email/password mismatch");
@@ -36,8 +37,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user, session, trigger }) {
+      console.log(
+        user ? user : "user undefined 43",
+        session ? session : "session undefined 43"
+      );
       if (trigger === "update" && session?.pseudo) {
         token.user.pseudo = session.pseudo;
       }
@@ -61,17 +67,19 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      console.log(
+        token ? token : "token undefined 67",
+        session ? session : "session undefined 67"
+      );
       session.user = token.user;
-
       return session;
     },
   },
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/auth",
+    signIn: "/authenticate",
   },
 };
 

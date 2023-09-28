@@ -23,7 +23,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col mt-5 border-t border-gray-100">
+    <footer className="w-full flex flex-col mt-5 border-t border-gray-100">
       <div className="flex justify-around py-6">
         {footerLinks.map((link) => (
           <Link key={link.href} href={link.href}>

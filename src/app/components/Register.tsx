@@ -17,14 +17,13 @@ export default function Register({ registered, setRegistered }: AuthProps) {
     email: "",
     password: "",
   });
-
   const formInputs = [
     {
       id: "pseudo",
       label: "Username",
       value: newUser.pseudo,
       setValue: setNewUser,
-      logo: <AiOutlineUser size={30} />,
+      logo: AiOutlineUser,
       type: "text",
     },
     {
@@ -32,7 +31,7 @@ export default function Register({ registered, setRegistered }: AuthProps) {
       label: "Email",
       value: newUser.email,
       setValue: setNewUser,
-      logo: <AiOutlineMail size={30} />,
+      logo: AiOutlineMail,
       type: "text",
     },
     {
@@ -40,7 +39,7 @@ export default function Register({ registered, setRegistered }: AuthProps) {
       label: "Password",
       value: newUser.password,
       setValue: setNewUser,
-      logo: <AiOutlineLock size={30} />,
+      logo: AiOutlineLock,
       type: "password",
     },
     {
@@ -48,39 +47,36 @@ export default function Register({ registered, setRegistered }: AuthProps) {
       label: "Confirm Password",
       value: checkedPassword,
       setValue: setCheckedPassword,
-      logo: <AiOutlineLock size={30} />,
+      logo: AiOutlineLock,
       type: "password",
     },
   ];
 
-  const register = async (e) => {
+  const register = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      if (newUser.password !== checkedPassword) {
-        toast.warn("Please confirm your password to register");
-        return;
+    if (
+      newUser.password === checkedPassword &&
+      newUser.email !== "" &&
+      newUser.pseudo !== ""
+    ) {
+      const res = await authFetcher("register", newUser);
+      if (res.success) {
+        setLoading(false);
+        toast.success(res.message);
+        setRegistered(true);
       } else {
-        const { success, status, message, error } = await authFetcher(
-          "register",
-          newUser
-        );
-        if (success || status === 201) {
-          setLoading(false);
-          toast.success(message);
-          setTimeout(() => setRegistered(true), "2000");
-        } else {
-          setLoading(false);
-          toast.error(message);
-        }
+        setLoading(false);
+        toast.error(res.message);
       }
-    } catch (e) {
+    } else {
       setLoading(false);
-      throw new Error(`Failed to register: ${e.message}`);
+      toast.warn("Please confirm your password.");
     }
   };
+
   return (
-    <div className="relative grid place-content-center">
+    <div className="relative grid place-content-center my-8">
       <ToastContainer
         position="top-center"
         autoClose={2000}
@@ -105,20 +101,26 @@ export default function Register({ registered, setRegistered }: AuthProps) {
                 label={input.label}
                 value={input.value}
                 setValue={input.setValue}
-                logo={input.logo}
+                Logo={input.logo}
                 type={input.type}
               />
             );
           })}
           <button
             type="submit"
-            className="px-4 py-1 text-lg font-semibold hover:text-red-600 text-slate-50 bg-gradient-to-br from-violet-500 to-purple-800 rounded-2xl">
+            className="px-4 py-1 text-lg font-semibold hover:text-slate-300 text-slate-50 bg-indigo-500 rounded-2xl">
             Register
+          </button>
+          <button
+            onClick={() => setRegistered(true)}
+            type="button"
+            className="underline mb-2 text-black hover:text-slate-300">
+            Already Registered ?
           </button>
         </form>
       ) : (
-        <div className="absolute top-[110px] right-[145px]">
-          <Loader />
+        <div className="absolute w top-[110px] right-[145px]">
+          <Loader size={38} />
         </div>
       )}
     </div>
