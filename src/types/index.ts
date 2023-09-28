@@ -1,3 +1,5 @@
+import { Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import { IconType } from "react-icons";
 
 export interface YugiCard {
@@ -27,4 +29,26 @@ export interface AddCardBtnProps extends isOpenStateProps {}
 
 export interface AddToDeckModalProps extends isOpenStateProps {
   deck: string;
+}
+
+export interface AuthProps {
+  registered: boolean;
+  setRegistered: (registered: boolean) => void;
+}
+
+export interface FormInputProps {
+  id: string;
+  label: string;
+  value: any;
+  setValue: (value: any) => void;
+  Logo: IconType;
+  type: string;
+}
+
+export interface User {
+  _id?: string;
+  id?: string;
+  pseudo?: string;
+  email: string;
+  password?: string;
 }

@@ -42,12 +42,13 @@ export default function AddToDeckModal({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-slate-200 h-[70vh] w-[40vw]">
+        className="bg-slate-200 w-[90vw] h-[70vh] lg:w-[40vw] rounded-sm shadow-lg">
         <button className="p-4" onClick={() => setIsOpen(false)} type="button">
-          <AiOutlineCloseCircle size={30} />
+          <AiOutlineCloseCircle color="black" size={30} />
         </button>
-        <p className="text-2xl px-4">
-          <span className={`text-deck-${deck} capitalize`}>{` ${deck} `}</span>
+        <p className="text-2xl px-4 text-black">
+          <span
+            className={`mx-1 text-deck-${deck} capitalize`}>{`${deck}`}</span>
           Deck :
         </p>
       </motion.div>
