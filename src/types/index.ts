@@ -1,8 +1,6 @@
-import { Session } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import { IconType } from "react-icons";
 
-export interface YugiCard {
+export interface YugiCards {
   id: number;
   name: string;
   type: string;
@@ -13,6 +11,11 @@ export interface YugiCard {
   race: string;
   attribute: string;
   img: string;
+  price: number;
+}
+
+export interface DeckProps {
+  allCards: YugiCards[];
 }
 
 export interface FooterLinks {
@@ -29,6 +32,7 @@ export interface AddCardBtnProps extends isOpenStateProps {}
 
 export interface AddToDeckModalProps extends isOpenStateProps {
   deck: string;
+  allCards: YugiCards[];
 }
 
 export interface AuthProps {
@@ -51,4 +55,10 @@ export interface User {
   pseudo?: string;
   email: string;
   password?: string;
+}
+
+export interface AnimatedTextProps {
+  text: string;
+  style?: string;
+  decoration?: string;
 }

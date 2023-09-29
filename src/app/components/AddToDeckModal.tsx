@@ -1,6 +1,7 @@
 import { AddToDeckModalProps } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import YugiCard from "./YugiCard";
 
 const listVariants = {
   open: {
@@ -32,7 +33,9 @@ export default function AddToDeckModal({
   isOpen,
   setIsOpen,
   deck,
+  allCards,
 }: AddToDeckModalProps) {
+  console.log(allCards);
   return (
     <motion.dialog
       initial={{ opacity: 0 }}
@@ -42,15 +45,24 @@ export default function AddToDeckModal({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-slate-200 w-[90vw] h-[70vh] lg:w-[40vw] rounded-sm shadow-lg">
-        <button className="p-4" onClick={() => setIsOpen(false)} type="button">
+        className="bg-slate-200 w-[90vw] h-[70vh] lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg">
+        <button className="" onClick={() => setIsOpen(false)} type="button">
           <AiOutlineCloseCircle color="black" size={30} />
         </button>
         <p className="text-2xl px-4 text-black">
           <span
-            className={`mx-1 text-deck-${deck} capitalize`}>{`${deck}`}</span>
+            style={{ color: `var(--deck-${deck})` }}
+            className={`mx-1 capitalize`}>
+            {deck}
+          </span>
           Deck :
         </p>
+        <div className="h-5/6 w-full">
+          <div className="bg-slate-500 h-full w-full grid place-items-center">
+            {allCards &&
+              allCards.map((card) => <YugiCard card={card} key={card.id} />)}
+          </div>
+        </div>
       </motion.div>
     </motion.dialog>
   );

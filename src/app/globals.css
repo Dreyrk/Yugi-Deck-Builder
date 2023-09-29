@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  padding-right: 10px;
-  padding-left: 10px;
+:root {
+  --deck-main: #f57f17;
+  --deck-extra: #5b21b6;
+  --deck-side: #15803d;
   background-color: #000814;
-  color: #f4f4f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 .modal-overlay {
