@@ -45,7 +45,7 @@ export default function AddToDeckModal({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-slate-200 w-[90vw] h-[70vh] lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg">
+        className="bg-slate-200 w-[92vw] h-[75vh] lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg">
         <button className="" onClick={() => setIsOpen(false)} type="button">
           <AiOutlineCloseCircle color="black" size={30} />
         </button>
@@ -57,8 +57,8 @@ export default function AddToDeckModal({
           </span>
           Deck :
         </p>
-        <div className="h-5/6 w-full">
-          <div className="bg-slate-500 h-full w-full grid place-items-center">
+        <div className="h-5/6 w-full p-2">
+          <div className="bg-slate-500 z-30 h-full w-full overflow-y-auto overflow-x-hidden grid grid-cols-2 lg:grid-cols-4 place-items-center">
             {allCards &&
               allCards.map((card) => <YugiCard card={card} key={card.id} />)}
           </div>
