@@ -1,6 +1,6 @@
 "use server";
 
-import getCardsById from "@/app/actions/getCardById";
+import getCardsById from "@/actions/getCardById";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const card = await getCardsById(params.id);

@@ -26,5 +26,101 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: grid;
   place-content: center;
-  z-index: 999;
+  z-index: 25;
+}
+
+.scrollbar-main::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Couleur de fond de la barre de défilement */
+.scrollbar-main::-webkit-scrollbar-track {
+  background-color: #f57f17;
+  border-radius: 10px;
+}
+
+/* Couleur de remplissage de la poignée (barre de défilement) */
+.scrollbar-main::-webkit-scrollbar-thumb {
+  background-color: #202020;
+  border-radius: 25px;
+}
+
+/* Couleur de survol de la poignée (barre de défilement) */
+.scrollbar-main::-webkit-scrollbar-thumb:active {
+  background-color: #000814;
+}
+
+/* Couleur de fond des boutons de flèche de défilement */
+.scrollbar-main::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Couleur de fond de la barre de défilement lors du défilement */
+.scrollbar-main::-webkit-scrollbar-track-piece:start {
+  background-color: #000814;
+}
+
+.scrollbar-extra::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Couleur de fond de la barre de défilement */
+.scrollbar-extra::-webkit-scrollbar-track {
+  background-color: #5b21b6;
+  border-radius: 10px;
+}
+
+/* Couleur de remplissage de la poignée (barre de défilement) */
+.scrollbar-extra::-webkit-scrollbar-thumb {
+  background-color: #202020;
+  border-radius: 25px;
+}
+
+/* Couleur de survol de la poignée (barre de défilement) */
+.scrollbar-extra::-webkit-scrollbar-thumb:active {
+  background-color: #000814;
+}
+
+/* Couleur de fond des boutons de flèche de défilement */
+.scrollbar-extra::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Couleur de fond de la barre de défilement lors du défilement */
+.scrollbar-extra::-webkit-scrollbar-track-piece:start {
+  background-color: #000814;
+}
+
+.scrollbar-side::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Couleur de fond de la barre de défilement */
+.scrollbar-side::-webkit-scrollbar-track {
+  background-color: #15803d;
+  border-radius: 10px;
+}
+
+/* Couleur de remplissage de la poignée (barre de défilement) */
+.scrollbar-side::-webkit-scrollbar-thumb {
+  background-color: #202020;
+  border-radius: 25px;
+}
+
+/* Couleur de survol de la poignée (barre de défilement) */
+.scrollbar-side::-webkit-scrollbar-thumb:active {
+  background-color: #000814;
+}
+
+/* Couleur de fond des boutons de flèche de défilement */
+.scrollbar-side::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Couleur de fond de la barre de défilement lors du défilement */
+.scrollbar-side::-webkit-scrollbar-track-piece:start {
+  background-color: #000814;
 }

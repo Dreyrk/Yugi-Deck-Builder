@@ -6,13 +6,13 @@ import AddToDeckModal from "./AddToDeckModal";
 import { DeckProps, YugiCards } from "@/types";
 import YugiCard from "./YugiCard";
 
-export default function MainDeck({ allCards }: DeckProps) {
+export default function SideDeck({ allCards }: DeckProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [cards, setCards] = useState<YugiCards[]>([]);
+  const [deck, setDeck] = useState<YugiCards[]>([]);
   return (
-    <section className="bg-yellow-900 mx-8 my-4 rounded-md border-4 border-orange-950">
+    <section className="bg-green-700 mx-8 my-4 rounded-md border-4 border-teal-950">
       <div className="grid grid-cols-4 lg:grid-cols-5 max-sm:grid-cols-2 place-items-center gap-6 p-4">
-        {cards.map((card) => (
+        {deck.map((card) => (
           <YugiCard card={card} key={card.id} />
         ))}
         <AddCardBtn isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -22,7 +22,7 @@ export default function MainDeck({ allCards }: DeckProps) {
           allCards={allCards}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          deck="main"
+          deckType="side"
         />
       )}
     </section>

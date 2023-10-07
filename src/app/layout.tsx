@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import AuthProvider from "./components/AuthProvider";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import AuthProvider from "@/components/AuthProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 

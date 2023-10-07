@@ -1,3 +1,4 @@
+import { YugiCards } from "@/types";
 import createCustomCards from "../utils/createCustomCards";
 
 const MainDeckTypes = [
@@ -8,7 +9,6 @@ const MainDeckTypes = [
   "Normal Monster",
   "Normal Tuner Monster",
   "Pendulum Effect Monster",
-  "Pendulum Effect Ritual Monster",
   "Pendulum Flip Effect Monster",
   "Pendulum Normal Monster",
   "Pendulum Tuner Effect Monster",
@@ -54,12 +54,14 @@ const getUrl = (type: string) => {
 async function getCards(type: string) {
   try {
     const url = getUrl(type);
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      cache: "no-store",
+    });
 
     if (res.ok) {
       const data = await res.json();
 
-      const cards = createCustomCards(data.data);
+      const cards: YugiCards[] = createCustomCards(data.data);
 
       return cards;
     } else {

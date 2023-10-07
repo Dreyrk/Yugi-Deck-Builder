@@ -1,5 +1,5 @@
-import AnimatedText from "./components/AnimatedText";
-import DeckBuilder from "./components/DeckBuilder";
+import AnimatedText from "@/components/AnimatedText";
+import DeckBuilder from "@/components/DeckBuilder";
 
 export default function Home() {
   return (

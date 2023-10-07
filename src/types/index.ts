@@ -14,6 +14,10 @@ export interface YugiCards {
   price: number;
 }
 
+export interface YugiCardProps {
+  card: YugiCards;
+}
+
 export interface DeckProps {
   allCards: YugiCards[];
 }
@@ -31,7 +35,7 @@ interface isOpenStateProps {
 export interface AddCardBtnProps extends isOpenStateProps {}
 
 export interface AddToDeckModalProps extends isOpenStateProps {
-  deck: string;
+  deckType: string;
   allCards: YugiCards[];
 }
 
