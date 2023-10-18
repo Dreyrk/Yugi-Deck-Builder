@@ -1,4 +1,4 @@
-import { YugiCards } from "@/types";
+import { YugiCards } from "../types/index";
 import createCustomCards from "../utils/createCustomCards";
 
 const MainDeckTypes = [
@@ -61,7 +61,7 @@ async function getCards(type: string) {
     if (res.ok) {
       const data = await res.json();
 
-      const cards: YugiCards[] = createCustomCards(data.data);
+      const cards: YugiCards[] = createCustomCards(data.data, type);
 
       return cards;
     } else {

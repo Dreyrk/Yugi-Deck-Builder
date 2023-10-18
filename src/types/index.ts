@@ -12,10 +12,19 @@ export interface YugiCards {
   attribute: string;
   img: string;
   price: number;
+  deckType?: string;
+}
+
+export interface Deck {
+  name: string;
+  main: YugiCards[];
+  extra: YugiCards[];
+  side: YugiCards[];
 }
 
 export interface YugiCardProps {
   card: YugiCards;
+  setSelectedCards?: (s: any) => void;
 }
 
 export interface DeckProps {

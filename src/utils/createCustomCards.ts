@@ -1,4 +1,4 @@
-import { YugiCards, FetchedCards, CardPrices } from "@/types";
+import { YugiCards, FetchedCards, CardPrices } from "../types/index";
 
 function getAvgPrice(prices: CardPrices): any {
   const currentPrice: any = Object.values(prices);
@@ -14,7 +14,7 @@ function getAvgPrice(prices: CardPrices): any {
   return avg.toFixed(2);
 }
 
-function createCustomCards(cards: FetchedCards[]) {
+function createCustomCards(cards: FetchedCards[], deckType?: string) {
   const cleanCards = cards.map((card: FetchedCards): YugiCards => {
     return {
       id: card.id,
@@ -28,6 +28,7 @@ function createCustomCards(cards: FetchedCards[]) {
       attribute: card.attribute,
       img: card.card_images[0].image_url,
       price: getAvgPrice(card.card_prices[0]),
+      deckType,
     };
   });
   return cleanCards;

@@ -1,15 +1,41 @@
+"use client";
+
+import { useState } from "react";
 import { AddToDeckModalProps } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 import YugiCard from "./YugiCard";
+import useDeckContext from "@/app/context/DeckContext";
 
 export default function AddToDeckModal({
   setIsOpen,
   deckType,
   allCards,
 }: AddToDeckModalProps) {
+  const { deck, setDeck } = useDeckContext();
+  const [selectedCards, setSelectedCards] = useState([]);
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const addToDeck = () => {
+    switch (deckType) {
+      case "main":
+        setDeck({ ...deck, main: [...deck.main, ...selectedCards] });
+
+      case "extra":
+        setDeck({ ...deck, extra: [...deck.extra, ...selectedCards] });
+
+      case "side":
+        setDeck({ ...deck, side: [...deck.side, ...selectedCards] });
+
+      default:
+        console.error("no deck type");
+        break;
+    }
+    console.log(deckType, selectedCards, deck.main);
+    setIsOpen(false);
+    setSelectedCards([]);
   };
 
   return (
@@ -33,9 +59,9 @@ export default function AddToDeckModal({
             </span>
             Deck :
           </p>
-          <div>
-            <AiFillCheckCircle size={40} />
-          </div>
+          <button type="button" onClick={addToDeck}>
+            <AiFillCheckCircle size={40} color="#a5be00" />
+          </button>
         </div>
         <div className="h-5/6 w-full p-2">
           <ul
@@ -43,7 +69,7 @@ export default function AddToDeckModal({
             {allCards &&
               allCards.map((card) => (
                 <li key={card.id} className="m-2">
-                  <YugiCard card={card} />
+                  <YugiCard setSelectedCards={setSelectedCards} card={card} />
                 </li>
               ))}
           </ul>

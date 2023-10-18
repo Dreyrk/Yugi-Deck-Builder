@@ -1,16 +1,13 @@
-import { YugiCards } from "@/types";
+"use client";
+
+import { Deck } from "@/types";
 import { ReactNode, createContext, useContext, useState } from "react";
 
 export const DeckContext = createContext({});
 
-interface Deck {
-  main: YugiCards[];
-  extra: YugiCards[];
-  side: YugiCards[];
-}
-
 export function DeckContextProvider({ children }: { children: ReactNode }) {
-  const [deck, setDeck] = useState({
+  const [deck, setDeck] = useState<Deck>({
+    name: "",
     main: [],
     extra: [],
     side: [],
@@ -23,6 +20,6 @@ export function DeckContextProvider({ children }: { children: ReactNode }) {
   );
 }
 
-const useDeckContext = () => useContext(DeckContext);
+const useDeckContext: any = () => useContext(DeckContext);
 
 export default useDeckContext;
