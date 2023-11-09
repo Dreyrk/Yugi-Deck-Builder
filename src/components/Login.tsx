@@ -6,11 +6,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProps } from "@/types";
 import FormInput from "./FormInput";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Login({ registered, setRegistered }: AuthProps) {
   const router = useRouter();
+  const { status } = useSession();
   const [loginUser, setLoginUser] = useState({
     email: "",
     password: "",
@@ -42,9 +43,11 @@ export default function Login({ registered, setRegistered }: AuthProps) {
       redirect: false,
       callbackUrl: "/",
     });
-    if (res?.ok) {
+    if (res?.ok && status === "authenticated") {
       toast.success("Login Successfully !");
       router.push("/profile");
+    } else {
+      toast.warn("Wrong credentials...");
     }
   };
 

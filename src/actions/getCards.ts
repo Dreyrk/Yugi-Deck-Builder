@@ -64,8 +64,6 @@ async function getCards(type: string) {
       const cards: YugiCards[] = createCustomCards(data.data, type);
 
       return cards;
-    } else {
-      console.error("failed to fetch");
     }
   } catch (e: any) {
     console.error(e.message);

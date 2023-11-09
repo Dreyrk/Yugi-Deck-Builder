@@ -3,9 +3,9 @@ import DeckBuilder from "@/components/DeckBuilder";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <AnimatedText text="Build your own Deck !" />
       <DeckBuilder />
-    </>
+    </main>
   );
 }

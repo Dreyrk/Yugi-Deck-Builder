@@ -13,7 +13,7 @@ export default function AddToDeckModal({
   allCards,
 }: AddToDeckModalProps) {
   const { deck, setDeck } = useDeckContext();
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedCards, setSelectedCards] = useState(deck[deckType] || []);
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -33,9 +33,7 @@ export default function AddToDeckModal({
         console.error("no deck type");
         break;
     }
-    console.log(deckType, selectedCards, deck.main);
-    setIsOpen(false);
-    setSelectedCards([]);
+    closeModal();
   };
 
   return (
