@@ -8,18 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        black: "#000814",
+        deck: {
+          main: "var(--deck-main)",
+          extra: "var(--deck-extra)",
+          side: "var(--deck-side)",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-      colors: {
-        black: "#000814",
-        deck: {
-          main: "#f57f17",
-          extra: "#5b21b6",
-          side: "#15803d",
-        },
       },
     },
   },

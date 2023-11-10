@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { AuthProps, User } from "@/types";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import authFetcher from "../utils/authFetcher";
 import Loader from "./Loader";
 import FormInput from "./FormInput";
 
-export default function Register({ registered, setRegistered }: AuthProps) {
+export default function Register({ setRegistered }: AuthProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [checkedPassword, setCheckedPassword] = useState<string>("");
   const [newUser, setNewUser] = useState<User>({
@@ -77,17 +76,6 @@ export default function Register({ registered, setRegistered }: AuthProps) {
 
   return (
     <div className="relative grid place-content-center my-8">
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="dark"
-      />
       {!loading ? (
         <form
           onSubmit={register}
