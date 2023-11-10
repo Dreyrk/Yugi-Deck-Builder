@@ -7,8 +7,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const userDecks = await getUserDecks(id);
 
-  console.log(userDecks[0].extra[0].img);
-
   return (
     <div>
       <h1>My Decks Page</h1>

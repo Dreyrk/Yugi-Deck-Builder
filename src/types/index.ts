@@ -25,6 +25,7 @@ export interface Deck {
 
 export interface YugiCardProps {
   card: YugiCards;
+  selectedCards?: YugiCards[];
   setSelectedCards?: (s: any) => void;
 }
 

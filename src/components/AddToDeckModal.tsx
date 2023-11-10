@@ -14,7 +14,7 @@ export default function AddToDeckModal({
 }: AddToDeckModalProps) {
   const listRef = useRef<HTMLUListElement>(null);
   const { deck, setDeck } = useDeckContext();
-  const [selectedCards, setSelectedCards] = useState(deck[deckType] || []);
+  const [selectedCards, setSelectedCards] = useState(deck[deckType]);
   const [displayedCards, setDisplayedCards] = useState<YugiCards[]>(
     allCards.slice(0, 60)
   );
@@ -71,8 +71,6 @@ export default function AddToDeckModal({
         console.error("no deck type");
         return;
     }
-
-    console.log(updatedDeck, selectedCards);
     setDeck(updatedDeck);
     closeModal();
   };
@@ -109,7 +107,11 @@ export default function AddToDeckModal({
             {allCards &&
               displayedCards.map((card) => (
                 <li key={card.id} className="m-2">
-                  <YugiCard setSelectedCards={setSelectedCards} card={card} />
+                  <YugiCard
+                    selectedCards={selectedCards}
+                    setSelectedCards={setSelectedCards}
+                    card={card}
+                  />
                 </li>
               ))}
           </ul>

@@ -5,8 +5,15 @@ import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
 import { BsCheck2Circle } from "react-icons/bs";
 
-export default function YugiCard({ card, setSelectedCards }: YugiCardProps) {
-  const [selected, setSelected] = useState(false);
+export default function YugiCard({
+  card,
+  selectedCards,
+  setSelectedCards,
+}: YugiCardProps) {
+  const isSelected = selectedCards?.some(
+    (selectedCard) => selectedCard.name === card.name
+  );
+  const [selected, setSelected] = useState(isSelected);
 
   const selectCard = () => {
     if (setSelectedCards) {
