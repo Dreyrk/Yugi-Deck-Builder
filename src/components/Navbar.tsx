@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MdLogin } from "react-icons/md";
+import { BiUserCircle } from "react-icons/bi";
 
-export default function Navbar() {
+export default function Navbar({ userId }: { userId: string }) {
   return (
     <header className="w-full absolute z-10">
       <nav className="max-w-[1440px] mx-auto flex justify-between items-center px-6 py-4">
@@ -22,10 +23,16 @@ export default function Navbar() {
         </h1>
         <Link
           className="bg-slate-100 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
-          href="/authenticate"
+          href={userId ? "/profile" : "/authenticate"}
           replace={true}>
-          <span className="hidden md:block">Sign Up / Sign In</span>
-          <MdLogin className="md:hidden block" size={30} />
+          {userId ? (
+            <BiUserCircle size={30} />
+          ) : (
+            <>
+              <span className="hidden md:block">Sign Up / Sign In</span>
+              <MdLogin className="md:hidden block" size={30} />
+            </>
+          )}
         </Link>
       </nav>
     </header>

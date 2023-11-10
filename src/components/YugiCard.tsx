@@ -5,18 +5,11 @@ import { YugiCardProps } from "@/types";
 import Image from "next/image";
 import { BsCheck2Circle } from "react-icons/bs";
 
-export default function YugiCard({ card, setSelectedCards }: YugiCardProps) {
+export default function YugiCard({ card }: YugiCardProps) {
   const [selected, setSelected] = useState(false);
 
   const selectCard = () => {
     setSelected(!selected);
-    if (selected) {
-      setSelectedCards((prev) =>
-        prev.filter((currentCard) => currentCard.id !== card.id)
-      );
-    } else {
-      setSelectedCards((prev) => [...prev, card]);
-    }
   };
 
   return (

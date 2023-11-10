@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { AddToDeckModalProps } from "@/types";
+import { useEffect, useRef, useState } from "react";
+import { AddToDeckModalProps, YugiCards } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 import YugiCard from "./YugiCard";
@@ -12,27 +12,67 @@ export default function AddToDeckModal({
   deckType,
   allCards,
 }: AddToDeckModalProps) {
+  const listRef = useRef<HTMLUListElement>(null);
   const { deck, setDeck } = useDeckContext();
   const [selectedCards, setSelectedCards] = useState(deck[deckType] || []);
+  const [displayedCards, setDisplayedCards] = useState<YugiCards[]>(
+    allCards.slice(0, 60)
+  );
+  const [visibleCardCount, setVisibleCardCount] = useState(12);
+
+  useEffect(() => {
+    const list = listRef.current;
+    const loadMoreCards = () => {
+      const nextBatch = displayedCards.slice(
+        visibleCardCount,
+        visibleCardCount * 4
+      );
+      setDisplayedCards([...displayedCards, ...nextBatch]);
+      setVisibleCardCount(visibleCardCount + 10);
+    };
+
+    const handleScroll = () => {
+      if (list) {
+        if (list.scrollTop + 20 >= list.scrollHeight - list.clientHeight) {
+          loadMoreCards();
+        }
+      }
+    };
+
+    if (list) {
+      list.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (list) {
+        list.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [displayedCards, listRef, visibleCardCount]);
+
   const closeModal = () => {
     setIsOpen(false);
   };
 
   const addToDeck = () => {
+    let updatedDeck;
+
     switch (deckType) {
       case "main":
-        setDeck({ ...deck, main: [...deck.main, ...selectedCards] });
-
+        updatedDeck = { ...deck, main: [...deck.main, ...selectedCards] };
+        break;
       case "extra":
-        setDeck({ ...deck, extra: [...deck.extra, ...selectedCards] });
-
+        updatedDeck = { ...deck, extra: [...deck.extra, ...selectedCards] };
+        break;
       case "side":
-        setDeck({ ...deck, side: [...deck.side, ...selectedCards] });
-
+        updatedDeck = { ...deck, side: [...deck.side, ...selectedCards] };
+        break;
       default:
         console.error("no deck type");
-        break;
+        return;
     }
+
+    setDeck(updatedDeck);
     closeModal();
   };
 
@@ -63,9 +103,10 @@ export default function AddToDeckModal({
         </div>
         <div className="h-5/6 w-full p-2">
           <ul
+            ref={listRef}
             className={`z-30 h-full w-full overflow-y-auto overflow-x-hidden grid grid-cols-2 lg:grid-cols-4 place-items-center scrollbar-${deckType}`}>
             {allCards &&
-              allCards.map((card) => (
+              displayedCards.map((card) => (
                 <li key={card.id} className="m-2">
                   <YugiCard setSelectedCards={setSelectedCards} card={card} />
                 </li>
