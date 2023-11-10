@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { AuthProps } from "@/types";
 import FormInput from "./FormInput";
 import { signIn, useSession } from "next-auth/react";
@@ -53,17 +52,6 @@ export default function Login({ registered, setRegistered }: AuthProps) {
 
   return (
     <div className="grid place-content-center my-28">
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        theme="dark"
-      />
       <form
         onSubmit={login}
         className="flex flex-col items-center rounded-lg bg-slate-100 max-w-sm justify-center gap-12 p-6">

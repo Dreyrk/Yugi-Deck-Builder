@@ -7,6 +7,8 @@ import AuthProvider from "@/components/AuthProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { DeckContextProvider } from "./context/DeckContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Yugi Deck Builder",
@@ -22,6 +24,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="relative">
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          theme="dark"
+        />
         <AuthProvider session={session}>
           <DeckContextProvider>
             <Navbar userId={session?.user.id} />

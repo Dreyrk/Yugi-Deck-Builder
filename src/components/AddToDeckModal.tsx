@@ -72,6 +72,7 @@ export default function AddToDeckModal({
         return;
     }
 
+    console.log(updatedDeck, selectedCards);
     setDeck(updatedDeck);
     closeModal();
   };

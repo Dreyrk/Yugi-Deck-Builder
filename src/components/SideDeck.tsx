@@ -8,10 +8,10 @@ import YugiCard from "./YugiCard";
 import useDeckContext from "@/app/context/DeckContext";
 
 export default function SideDeck({ allCards }: DeckProps) {
+  const { deck } = useDeckContext();
   const [isOpen, setIsOpen] = useState(false);
-  const { deck, setDeck } = useDeckContext();
   return (
-    <section className="bg-green-700 mx-8 my-4 rounded-md border-4 border-teal-950">
+    <section className="bg-green-700 my-4 rounded-md border-4 border-teal-950">
       <div className="grid grid-cols-4 lg:grid-cols-5 max-sm:grid-cols-2 place-items-center gap-6 p-4">
         {deck.side.map((card: YugiCards) => (
           <YugiCard card={card} key={card.id} />

@@ -1,15 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { YugiCardProps } from "@/types";
+import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
 import { BsCheck2Circle } from "react-icons/bs";
 
-export default function YugiCard({ card }: YugiCardProps) {
+export default function YugiCard({ card, setSelectedCards }: YugiCardProps) {
   const [selected, setSelected] = useState(false);
 
   const selectCard = () => {
-    setSelected(!selected);
+    if (setSelectedCards) {
+      setSelected(!selected);
+      if (selected) {
+        setSelectedCards((prev: YugiCards[]) =>
+          prev.filter((currentCard: YugiCards) => currentCard.id !== card.id)
+        );
+      } else {
+        setSelectedCards((prev: YugiCards[]) => [...prev, card]);
+      }
+    }
   };
 
   return (
