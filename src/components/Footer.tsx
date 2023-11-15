@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   AiOutlineGithub,
   AiFillLinkedin,
@@ -26,9 +25,9 @@ export default function Footer() {
     <footer className="w-full flex flex-col mt-5 border-t border-gray-100">
       <div className="flex justify-around py-6">
         {footerLinks.map((link) => (
-          <Link key={link.href} href={link.href}>
+          <a key={link.href} href={link.href} target="_blank">
             {link.logo}
-          </Link>
+          </a>
         ))}
       </div>
       <h3 className="p-6 flex font-semibold text-xs justify-center items-center gap-4 text-slate-200">
