@@ -9,7 +9,7 @@ import { ImFire } from "react-icons/im";
 const footerLinks = [
   {
     logo: <AiFillInstagram size={40} color="#f8f9fa" />,
-    href: "https://www.instagram.com/kanashii.seigan/",
+    href: "https://www.instagram.com/dev_forge_hub",
   },
   {
     logo: <AiOutlineGithub size={40} color="#f8f9fa" />,

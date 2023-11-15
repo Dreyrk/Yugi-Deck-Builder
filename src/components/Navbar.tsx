@@ -18,7 +18,7 @@ export default function Navbar({ userId }: { userId: string }) {
             height={80}
           />
         </Link>
-        <h1 className="text-white text-3xl text-center font-semibold">
+        <h1 className="text-white text-5xl text-center font-semibold">
           Deck Builder
         </h1>
         <Link
