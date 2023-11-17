@@ -37,7 +37,7 @@ export default async function RootLayout({
         />
         <AuthProvider session={session}>
           <DeckContextProvider>
-            <Navbar userId={session?.user.id} />
+            <Navbar />
             <main className="overflow-hidden pt-28">{children}</main>
             <Footer />
           </DeckContextProvider>

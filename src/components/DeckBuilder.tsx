@@ -1,12 +1,11 @@
 "use client";
 
-import { Deck, YugiCards } from "@/types";
+import { YugiCards } from "@/types";
 import ExtraDeck from "./ExtraDeck";
 import MainDeck from "./MainDeck";
 import SideDeck from "./SideDeck";
 import useDeckContext from "@/app/context/DeckContext";
-import { useSession } from "next-auth/react";
-import { toast } from "react-toastify";
+import CreateDeckBtn from "./CreateDeckBtn";
 
 export default function DeckBuilder({
   mainCards,
@@ -18,57 +17,6 @@ export default function DeckBuilder({
   sideCards: YugiCards[];
 }) {
   const { deck, setDeck } = useDeckContext();
-  const { data: session } = useSession();
-
-  const isDeckValid = (deck: Deck): boolean => {
-    const { main, extra } = deck;
-
-    const totalCards: number = main.length + extra.length;
-
-    const sameCards = deck.main.every((card, i, deck) => {
-      const occurences = deck.filter(
-        (otherCard) => otherCard.name === card.name
-      ).length;
-      return occurences <= 3;
-    });
-
-    if (sameCards)
-      if (!deck.name) {
-        toast.warn("You must provide a deck name");
-        return false;
-      }
-
-    if (totalCards < 40 || totalCards > 60) {
-      toast.warn("Deck must contain between 40 and 60 cards");
-      return false;
-    }
-
-    if (extra.length > 15) {
-      toast.warn("Extra Deck cannot contain more than 15 cards");
-      return false;
-    }
-
-    return true;
-  };
-
-  const createDeck = async () => {
-    if (session?.user.id) {
-      const isValid = isDeckValid(deck);
-      if (isValid) {
-        await fetch(`/api/user/${session?.user.id}/deck/create`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ deck }),
-        });
-      } else {
-        console.error("deck is not valid");
-      }
-    } else {
-      toast.warn("Please create an account to save decks");
-    }
-  };
 
   return (
     <div className="flex flex-col justify-between py-10 mx-8">
@@ -89,12 +37,7 @@ export default function DeckBuilder({
       <MainDeck allCards={mainCards} />
       <ExtraDeck allCards={extraCards} />
       <SideDeck allCards={sideCards} />
-      <button
-        onClick={createDeck}
-        className="bg-yellow-300 text-slate-900 text-lg font-semibold px-4 py-2 w-fit rounded-lg hover:text-slate-100 self-center mt-8"
-        type="button">
-        Create
-      </button>
+      <CreateDeckBtn />
     </div>
   );
 }

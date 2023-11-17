@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         black: "#000814",
+        white: "#f8f9fa",
         deck: {
           main: "var(--deck-main)",
           extra: "var(--deck-extra)",

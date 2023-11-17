@@ -47,11 +47,9 @@ export default function AnimatedText({ text, style }: AnimatedTextProps) {
   return (
     <motion.div
       ref={ref}
-      className={
-        style
-          ? style
-          : "flex justify-center text-white items-center text-4xl my-12 w-full font-bold"
-      }
+      className={`flex justify-center text-white items-center text-3xl my-12 w-full font-bold ${
+        style && style
+      }`}
       variants={container}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}>
