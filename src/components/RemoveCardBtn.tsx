@@ -1,7 +1,6 @@
 "use client";
 
 import useDeckContext from "@/app/context/DeckContext";
-import { YugiCards } from "@/types";
 import { FaMinusCircle } from "react-icons/fa";
 
 export default function RemoveCardBtn({
@@ -11,15 +10,15 @@ export default function RemoveCardBtn({
   cardId: number;
   deckType: string;
 }) {
-  const { deck, setDeck } = useDeckContext();
+  const { dispatch } = useDeckContext();
 
-  const removeCard = () => {
-    if (deckType !== "none") {
-      const newDeck = deck[deckType].filter(
-        (card: YugiCards) => card.id !== cardId
-      );
-
-      setDeck(newDeck);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (deckType === "main" || deckType === "extra" || deckType === "side") {
+      dispatch({
+        type: "REMOVE_CARD",
+        payload: { cardId: cardId, deckTypeToRemove: deckType },
+      });
     } else {
       console.error("no deck type in remove btn");
     }
@@ -27,7 +26,7 @@ export default function RemoveCardBtn({
 
   return (
     <button
-      onClick={removeCard}
+      onClick={handleClick}
       className="absolute top-1 right-3"
       type="button">
       <FaMinusCircle size={30} color="#bf0603" />

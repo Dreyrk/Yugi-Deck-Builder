@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { MdLogin } from "react-icons/md";
 import { BiUserCircle } from "react-icons/bi";
+import { useSession } from "next-auth/react";
 
-export default function Navbar({ userId }: { userId: string }) {
+export default function Navbar() {
+  const { status } = useSession();
+
   return (
     <header className="w-full absolute z-10">
       <nav className="max-w-[1440px] mx-auto flex justify-between items-center px-6 py-4">
@@ -23,9 +28,9 @@ export default function Navbar({ userId }: { userId: string }) {
         </h1>
         <Link
           className="bg-slate-100 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
-          href={userId ? "/profile" : "/authenticate"}
+          href={status === "authenticated" ? "/profile" : "/authenticate"}
           replace={true}>
-          {userId ? (
+          {status === "authenticated" ? (
             <BiUserCircle size={30} />
           ) : (
             <>
