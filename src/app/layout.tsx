@@ -38,7 +38,7 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <DeckContextProvider>
             <Navbar />
-            <main className="overflow-hidden pt-28">{children}</main>
+            <main className="overflow-hidden pt-28 px-2">{children}</main>
             <Footer />
           </DeckContextProvider>
         </AuthProvider>

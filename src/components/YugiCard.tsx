@@ -5,6 +5,7 @@ import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
 import { BsCheck2Circle } from "react-icons/bs";
 import RemoveCardBtn from "./RemoveCardBtn";
+import countCards from "@/utils/countCards";
 
 export default function YugiCard({
   card,
@@ -13,21 +14,20 @@ export default function YugiCard({
   selectedCards,
   setSelectedCards,
 }: YugiCardProps) {
-  const isSelected = selectedCards?.some(
-    (selectedCard) => selectedCard.id === card.id
-  );
+  const isSelected = selectedCards?.length
+    ? countCards(card, selectedCards)
+    : 0;
   const [selected, setSelected] = useState(isSelected);
 
   const selectCard = () => {
-    if (setSelectedCards) {
-      setSelected(!selected);
-      if (selected) {
-        setSelectedCards((prev: YugiCards[]) =>
-          prev.filter((currentCard: YugiCards) => currentCard.id !== card.id)
-        );
-      } else {
-        setSelectedCards((prev: YugiCards[]) => [...prev, card]);
-      }
+    if (selected < 3) {
+      setSelectedCards((prev: YugiCards[]) => [...prev, card]);
+      setSelected(selected + 1);
+    } else {
+      setSelectedCards((prev: YugiCards[]) =>
+        prev.filter((currentCard: YugiCards) => currentCard.id !== card.id)
+      );
+      setSelected(0);
     }
   };
 
@@ -37,12 +37,12 @@ export default function YugiCard({
       type="button"
       className="relative lg:hover:scale-125">
       {inDeck && <RemoveCardBtn deckType={deckType} cardId={card.id} />}
-      <div
+      <span
         className={`${
           !selected && "hidden"
-        } absolute top-[40%] left-[37%] z-50`}>
-        <BsCheck2Circle size={40} color="white" />
-      </div>
+        } absolute top-[40%] left-[37%] z-50 bg-slate-200 rounded-full h-8 w-8 grid place-content-center font-semibold`}>
+        {selected}
+      </span>
       <Image
         className="z-40"
         src={card.img ? card.img : "/cardBack.jpg"}
