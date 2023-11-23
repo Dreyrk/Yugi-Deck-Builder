@@ -1,15 +1,10 @@
+"use client";
+
 import { FaTrash } from "react-icons/fa";
 
-export default function DeleteDeckBtn({
-  deleteDeck,
-}: {
-  deleteDeck: () => void;
-}) {
+export default function DeleteDeckBtn() {
   return (
-    <button
-      className="absolute top-1 right-1 p-2 rounded-sm backdrop-blur hover:scale-110"
-      type="button"
-      onClick={deleteDeck}>
+    <button className="hover:scale-110" type="submit">
       <FaTrash size={30} color="#d00000" />
     </button>
   );

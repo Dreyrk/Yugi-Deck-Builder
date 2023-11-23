@@ -13,10 +13,17 @@ export default async function Page({ params }: { params: { userId: string } }) {
       <h1 className="text-3xl font-semibold text-slate-100 underline">
         Decks :
       </h1>
-      <ul className="flex flex-wrap gap-10 my-10  max-sm:justify-center">
-        {userDecks &&
-          userDecks.map((deck: Deck) => <DeckBox deck={deck} key={deck._id} />)}
-      </ul>
+      {userDecks.length ? (
+        <ul className="flex flex-wrap gap-10 my-10  max-sm:justify-center">
+          {userDecks.map((deck: Deck) => (
+            <DeckBox userId={userId} deck={deck} key={deck._id} />
+          ))}
+        </ul>
+      ) : (
+        <div className="grid place-content-center h-40">
+          <h1 className="text-xl text-white">No Decks</h1>
+        </div>
+      )}
     </div>
   );
 }

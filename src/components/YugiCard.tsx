@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
-import { BsCheck2Circle } from "react-icons/bs";
 import RemoveCardBtn from "./RemoveCardBtn";
 import countCards from "@/utils/countCards";
 

@@ -2,18 +2,26 @@
 
 import { connect } from "@/lib/dbConnection";
 import Users from "@/models/usersModel";
-import { Deck } from "@/types";
+import { Types, disconnect } from "mongoose";
+import { revalidatePath } from "next/cache";
+import { toast } from "react-toastify";
 
 async function deleteUserDeck(userId: string, deckId: string) {
   try {
+    const userObjId = new Types.ObjectId(userId);
+    const deckObjId = new Types.ObjectId(deckId);
     await connect();
-    const currentUser = await Users.findById(userId);
 
-    currentUser.decks = currentUser.decks.filter(
-      (deck: Deck) => deck._id !== deckId
+    const results = await Users.updateOne(
+      { _id: userObjId },
+      { $pull: { decks: { _id: deckObjId } } }
     );
 
-    await currentUser.save();
+    if (results.modifiedCount === 1) {
+      revalidatePath(`/profile/${userId}/decks`);
+    } else {
+      toast.error("Something goes wrong...");
+    }
   } catch (e: any) {
     throw new Error(`Cannot delete ${userId} deck (${deckId})`);
   }

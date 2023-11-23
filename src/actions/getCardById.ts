@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import createCustomCards from "../utils/createCustomCards";
 
 async function getCardsById(id: string) {
@@ -17,6 +18,8 @@ async function getCardsById(id: string) {
     }
   } catch (e: any) {
     console.error(e.message);
+  } finally {
+    mongoose.disconnect();
   }
 }
 

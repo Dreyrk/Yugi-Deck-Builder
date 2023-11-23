@@ -6,7 +6,7 @@ import MainDeck from "./MainDeck";
 import SideDeck from "./SideDeck";
 import useDeckContext from "@/app/context/DeckContext";
 import CreateDeckBtn from "./CreateDeckBtn";
-import { MdLoop } from "react-icons/md";
+import { GrPowerReset } from "react-icons/gr";
 
 export default function DeckBuilder({
   mainCards,
@@ -49,8 +49,8 @@ export default function DeckBuilder({
           onClick={reset}
           className="bg-slate-100 p-2 h-12 w-12 rounded-full grid place-content-center"
           type="button">
-          <span className="hover:animate-reverse-spin">
-            <MdLoop size={30} color="black" />
+          <span className="hover:animate-spin">
+            <GrPowerReset size={30} color="black" />
           </span>
         </button>
       </div>
