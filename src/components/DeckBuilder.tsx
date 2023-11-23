@@ -7,6 +7,7 @@ import SideDeck from "./SideDeck";
 import useDeckContext from "@/app/context/DeckContext";
 import CreateDeckBtn from "./CreateDeckBtn";
 import { GrPowerReset } from "react-icons/gr";
+import getDeckLength from "@/utils/getDeckLength";
 
 export default function DeckBuilder({
   mainCards,
@@ -18,6 +19,8 @@ export default function DeckBuilder({
   sideCards: YugiCards[];
 }) {
   const { deck, dispatch } = useDeckContext();
+
+  const deckLength = getDeckLength(deck);
 
   const reset = () => {
     dispatch({ type: "RESET" });
@@ -57,6 +60,14 @@ export default function DeckBuilder({
       <MainDeck allCards={mainCards} />
       <ExtraDeck allCards={extraCards} />
       <SideDeck allCards={sideCards} />
+      <div>
+        <p className="text-white text-lg font-medium">
+          Deck Length:{" "}
+          <span className={`text-${deckLength < 40 && "red-600"}`}>
+            {deckLength}
+          </span>
+        </p>
+      </div>
       <CreateDeckBtn />
     </div>
   );

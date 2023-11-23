@@ -4,6 +4,7 @@ import Link from "next/link";
 import DeleteDeckBtn from "./DeleteDeckBtn";
 import deleteUserDeck from "@/actions/deleteUserDeck";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 
 export default function DeckBox({
   deck,
@@ -12,6 +13,7 @@ export default function DeckBox({
   deck: Deck;
   userId: string;
 }) {
+  const currPathname = headers().get("next-url");
   const deleteDeck = async () => {
     "use server";
     await deleteUserDeck(userId, deck._id);
@@ -24,7 +26,7 @@ export default function DeckBox({
         action={deleteDeck}>
         <DeleteDeckBtn />
       </form>
-      <Link href={deck._id}>
+      <Link href={`${currPathname}/${deck._id}`}>
         <div className="h-full w-60 bg-slate-200 flex flex-col items-center z-0">
           <Image
             src={deck.extra[0].img}

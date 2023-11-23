@@ -29,6 +29,22 @@
   z-index: 25;
 }
 
+.main-deck {
+  @apply bg-yellow-900 my-4 rounded-md border-4 border-orange-950;
+}
+
+.extra-deck {
+  @apply bg-violet-800 my-4 rounded-md border-4 border-violet-950;
+}
+
+.side-deck {
+  @apply bg-green-700 my-4 rounded-md border-4 border-teal-950;
+}
+
+.deck-display {
+  @apply grid grid-cols-4 lg:grid-cols-5 max-sm:grid-cols-2 place-items-center gap-6 p-4;
+}
+
 .scrollbar-main::-webkit-scrollbar {
   width: 10px;
   height: 10px;

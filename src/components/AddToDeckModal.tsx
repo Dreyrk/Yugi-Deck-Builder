@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { AddToDeckModalProps, YugiCards } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 import YugiCard from "./YugiCard";
 import useDeckContext from "@/app/context/DeckContext";
+import Loader from "./Loader";
 
 export default function AddToDeckModal({
   setIsOpen,
@@ -19,6 +20,17 @@ export default function AddToDeckModal({
     allCards.slice(0, 60)
   );
   const [visibleCardCount, setVisibleCardCount] = useState(12);
+  const [search, setSearch] = useState("");
+  const deferredSearch = useDeferredValue(search);
+
+  useMemo(() => {
+    const searchedCards = allCards
+      .filter((card) =>
+        card.name.toLowerCase().includes(deferredSearch.toLowerCase())
+      )
+      .slice(0, 60);
+    setDisplayedCards(searchedCards);
+  }, [deferredSearch]);
 
   useEffect(() => {
     const list = listRef.current;
@@ -72,7 +84,7 @@ export default function AddToDeckModal({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-stone-200 w-[92vw] h-[75vh] lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg z-50">
+        className="bg-stone-200 w-[92vw] h-[75vh] overflow-hidden lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg z-50">
         <button className="max-w-[35px]" onClick={closeModal} type="button">
           <AiOutlineCloseCircle color="black" size={30} />
         </button>
@@ -90,10 +102,21 @@ export default function AddToDeckModal({
           </button>
         </div>
         <div className="h-5/6 w-full p-2">
+          <div className="flex items-center gap-6 px-6 py-4">
+            <label htmlFor="search">Search :</label>
+            <input
+              className="flex-grow rounded-md p-1 box-border"
+              id="search"
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoComplete="off"
+            />
+          </div>
           <ul
             ref={listRef}
             className={`z-30 h-full w-full overflow-y-auto overflow-x-hidden grid grid-cols-2 lg:grid-cols-4 place-items-center scrollbar-${deckType}`}>
-            {allCards &&
+            {allCards ? (
               displayedCards.map((card) => (
                 <li key={card.id} className="m-2">
                   <YugiCard
@@ -102,7 +125,10 @@ export default function AddToDeckModal({
                     card={card}
                   />
                 </li>
-              ))}
+              ))
+            ) : (
+              <Loader />
+            )}
           </ul>
         </div>
       </motion.div>

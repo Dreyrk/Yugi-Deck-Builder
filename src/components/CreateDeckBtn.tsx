@@ -6,20 +6,22 @@ import isDeckValid from "@/utils/isDeckValid";
 
 export default function CreateDeckBtn() {
   const { data: session, status } = useSession();
-  const { deck } = useDeckContext();
+  const { deck, dispatch } = useDeckContext();
 
   const createDeck = async () => {
     const isValid = isDeckValid(deck);
     if (isValid) {
-      await fetch(`/api/user/${session?.user.id}/deck/create`, {
+      const res = await fetch(`/api/user/${session?.user.id}/deck/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ deck }),
       });
-    } else {
-      throw new Error("Deck is not valid");
+
+      if (res.ok) {
+        dispatch({ type: "RESET" });
+      }
     }
   };
 

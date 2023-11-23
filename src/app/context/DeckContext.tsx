@@ -12,6 +12,7 @@ import {
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const emptyDeck = {
+  _id: "",
   name: "",
   main: [],
   extra: [],
