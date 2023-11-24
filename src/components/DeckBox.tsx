@@ -14,9 +14,10 @@ export default function DeckBox({
   userId: string;
 }) {
   const currPathname = headers().get("next-url");
+  const deckCover = deck.extra[0] ? deck.extra[0].img : deck.main[0].img;
   const deleteDeck = async () => {
     "use server";
-    await deleteUserDeck(userId, deck._id);
+    await deleteUserDeck(userId, deck.id);
     revalidatePath(`/profile/${userId}/decks`);
   };
   return (
@@ -26,14 +27,14 @@ export default function DeckBox({
         action={deleteDeck}>
         <DeleteDeckBtn />
       </form>
-      <Link href={`${currPathname}/${deck._id}`}>
+      <Link href={`decks/${deck.id}`}>
         <div className="h-full w-60 bg-slate-200 flex flex-col items-center z-0">
           <Image
-            src={deck.extra[0].img}
+            src={deckCover}
             alt="firstCard"
             width={1000}
             height={1000}
-            blurDataURL={`${deck.extra[0].img}`}
+            blurDataURL={`${deckCover}`}
           />
           <div className="absolute bottom-0 left-0 w-full h-1/3 p-6 flex flex-col gap-4 bg-transparent backdrop-brightness-50 backdrop-blur-sm z-30">
             <h1 className="text-xl text-slate-100 font-semibold">

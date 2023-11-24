@@ -16,7 +16,7 @@ export interface YugiCards {
 }
 
 export interface Deck {
-  _id: string;
+  id: any;
   name: string;
   main: YugiCards[];
   extra: YugiCards[];

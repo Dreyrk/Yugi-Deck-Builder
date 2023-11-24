@@ -12,7 +12,6 @@ import {
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const emptyDeck = {
-  _id: "",
   name: "",
   main: [],
   extra: [],
@@ -24,7 +23,7 @@ export const DeckContext = createContext({
   dispatch: (() => {}) as React.Dispatch<any>,
 });
 
-function deckReducer(deck: any, action: { type: string; payload?: any }): Deck {
+function deckReducer(deck: any, action: { type: string; payload?: any }) {
   switch (action.type) {
     case "RESET":
       return emptyDeck;

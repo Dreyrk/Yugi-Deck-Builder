@@ -1,3 +1,5 @@
+"use server";
+
 import getDeck from "@/actions/getDeck";
 import DeckDisplayer from "@/components/DeckDisplayer";
 import getDeckLength from "@/utils/getDeckLength";
