@@ -7,11 +7,13 @@ import { Deck } from "@/types";
 async function getDeck(userId: string, deckId: string) {
   try {
     await connect();
-    const currentUserDeck = await Users.findById(userId).select({
-      decks: { $elemMatch: { _id: deckId } },
-    });
+    const currentUser = await Users.findById(userId);
 
-    return currentUserDeck.decks[0];
+    const currentUserDeck = currentUser.decks.find(
+      (deck: Deck) => deck.id === deckId
+    );
+
+    return currentUserDeck;
   } catch (e: any) {
     throw new Error(`failed to get deck ${deckId} : ${e.message}`);
   }

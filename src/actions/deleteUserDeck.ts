@@ -2,7 +2,7 @@
 
 import { connect } from "@/lib/dbConnection";
 import Users from "@/models/usersModel";
-import { Types, disconnect } from "mongoose";
+import { Types } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { toast } from "react-toastify";
 

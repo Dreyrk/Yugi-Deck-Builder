@@ -16,7 +16,8 @@ async function createUserDeck(id: string, deck: Deck) {
 
       await currentUser.save();
     } else {
-      return;
+      console.error("deck is not valid");
+      return null;
     }
   } catch (e: any) {
     throw new Error(`failed to create deck ${e.message}`);

@@ -1,3 +1,5 @@
+"use server";
+
 import { YugiCards } from "../types/index";
 import createCustomCards from "../utils/createCustomCards";
 

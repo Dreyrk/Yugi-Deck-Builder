@@ -8,10 +8,6 @@ const nextConfig = {
       transform: "react-icons/{{member}}",
     },
   },
-  experimental: {
-    serverActions: true,
-    appDir: true,
-  },
 };
 
 module.exports = nextConfig;
