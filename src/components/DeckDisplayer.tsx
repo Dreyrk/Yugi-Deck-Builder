@@ -1,5 +1,5 @@
 import { Deck, YugiCards } from "@/types";
-import YugiCard from "./YugiCard";
+import StaticYugiCard from "./StaticYugiCard";
 
 export default function DeckDisplayer({ deck }: { deck: Deck }) {
   return (
@@ -8,7 +8,7 @@ export default function DeckDisplayer({ deck }: { deck: Deck }) {
         <div className="deck-display">
           {deck.main &&
             deck.main.map((card: YugiCards, i: number) => (
-              <YugiCard deckType="main" card={card} key={card.id + i} />
+              <StaticYugiCard card={card} key={card.id + i} />
             ))}
         </div>
       </section>
@@ -16,7 +16,7 @@ export default function DeckDisplayer({ deck }: { deck: Deck }) {
         <div className="deck-display">
           {deck.extra &&
             deck.extra.map((card: YugiCards, i: number) => (
-              <YugiCard deckType="main" card={card} key={card.id + i} />
+              <StaticYugiCard card={card} key={card.id + i} />
             ))}
         </div>
       </section>
@@ -24,7 +24,7 @@ export default function DeckDisplayer({ deck }: { deck: Deck }) {
         <div className="deck-display">
           {deck.side &&
             deck.side.map((card: YugiCards, i: number) => (
-              <YugiCard deckType="main" card={card} key={card.id + i} />
+              <StaticYugiCard card={card} key={card.id + i} />
             ))}
         </div>
       </section>
