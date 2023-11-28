@@ -1,5 +1,5 @@
 import { YugiCards } from "@/types";
-import StaticYugiCard from "../StaticYugiCard";
+import StaticYugiCard from "../cards/StaticYugiCard";
 
 export default function StaticDeck({
   deck,

@@ -4,7 +4,7 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { AddToDeckModalProps, YugiCards } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
-import YugiCard from "./YugiCard";
+import YugiCard from "./cards/YugiCard";
 import useDeckContext from "@/context/DeckContext";
 import Loader from "./Loader";
 

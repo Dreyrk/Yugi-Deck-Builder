@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
-import RemoveCardBtn from "./RemoveCardBtn";
+import RemoveCardBtn from "../RemoveCardBtn";
 import countCards from "@/utils/countCards";
 
 export default function YugiCard({
