@@ -67,6 +67,12 @@ export interface FormInputProps {
   type: string;
 }
 
+export type AuthUser = {
+  pseudo?: string;
+  email: string;
+  password: string;
+};
+
 export interface User {
   _id?: string;
   id: string;

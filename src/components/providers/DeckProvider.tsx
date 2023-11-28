@@ -1,15 +1,7 @@
-"use client";
-
-import { Deck, YugiCards } from "@/types";
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-} from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { YugiCards } from "@/types";
+import { useEffect, useMemo, useReducer } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { DeckContext } from "@/context/DeckContext";
 
 const emptyDeck = {
   name: "",
@@ -17,11 +9,6 @@ const emptyDeck = {
   extra: [],
   side: [],
 };
-
-export const DeckContext = createContext({
-  deck: {} as Deck,
-  dispatch: (() => {}) as React.Dispatch<any>,
-});
 
 function deckReducer(deck: any, action: { type: string; payload?: any }) {
   switch (action.type) {
@@ -53,7 +40,11 @@ function deckReducer(deck: any, action: { type: string; payload?: any }) {
   }
 }
 
-export function DeckContextProvider({ children }: { children: ReactNode }) {
+export default function DeckContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [getStoredDeck, setStoredDeck] = useLocalStorage("deck");
 
   const storedDeck = getStoredDeck();
@@ -72,7 +63,3 @@ export function DeckContextProvider({ children }: { children: ReactNode }) {
     <DeckContext.Provider value={contextValue}>{children}</DeckContext.Provider>
   );
 }
-
-const useDeckContext: any = () => useContext(DeckContext);
-
-export default useDeckContext;

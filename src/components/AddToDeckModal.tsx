@@ -5,7 +5,7 @@ import { AddToDeckModalProps, YugiCards } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 import YugiCard from "./YugiCard";
-import useDeckContext from "@/app/context/DeckContext";
+import useDeckContext from "@/context/DeckContext";
 import Loader from "./Loader";
 
 export default function AddToDeckModal({
@@ -30,7 +30,7 @@ export default function AddToDeckModal({
       )
       .slice(0, 60);
     setDisplayedCards(searchedCards);
-  }, [deferredSearch]);
+  }, [deferredSearch, allCards]);
 
   useEffect(() => {
     const list = listRef.current;

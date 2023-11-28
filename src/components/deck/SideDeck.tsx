@@ -1,23 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import AddToDeckModal from "./AddToDeckModal";
-import AddCardBtn from "./AddCardBtn";
+import AddCardBtn from "../AddCardBtn";
+import AddToDeckModal from "../AddToDeckModal";
 import { DeckProps, YugiCards } from "@/types";
-import YugiCard from "./YugiCard";
-import useDeckContext from "@/app/context/DeckContext";
+import YugiCard from "../YugiCard";
+import useDeckContext from "@/context/DeckContext";
 
-export default function ExtraDeck({ allCards }: DeckProps) {
+export default function SideDeck({ allCards }: DeckProps) {
   const { deck } = useDeckContext();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className="extra-deck">
+    <section className="side-deck">
       <div className="deck-display">
-        {deck.extra &&
-          deck.extra.map((card: YugiCards, i: number) => (
+        {deck.side &&
+          deck.side.map((card: YugiCards, i: number) => (
             <YugiCard
               card={card}
-              deckType="extra"
+              deckType="side"
               inDeck={true}
               key={card.id + i}
             />
@@ -29,7 +29,7 @@ export default function ExtraDeck({ allCards }: DeckProps) {
           allCards={allCards}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          deckType="extra"
+          deckType="side"
         />
       )}
     </section>

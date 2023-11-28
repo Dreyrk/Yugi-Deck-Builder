@@ -1,8 +1,9 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import useDeckContext from "@/app/context/DeckContext";
+import useDeckContext from "@/context/DeckContext";
 import isDeckValid from "@/utils/isDeckValid";
+import { toast } from "react-toastify";
 
 export default function CreateDeckBtn() {
   const { data: session, status } = useSession();
@@ -21,6 +22,7 @@ export default function CreateDeckBtn() {
 
       if (res.ok) {
         dispatch({ type: "RESET" });
+        toast.success("Deck Created !");
       }
     }
   };

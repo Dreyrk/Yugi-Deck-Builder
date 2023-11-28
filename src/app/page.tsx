@@ -2,7 +2,7 @@
 
 import getCards from "../actions/getCards";
 import AnimatedText from "@/components/AnimatedText";
-import DeckBuilder from "@/components/DeckBuilder";
+import DeckBuilder from "@/components/deck/DeckBuilder";
 import { YugiCards } from "@/types";
 
 export default async function Home() {

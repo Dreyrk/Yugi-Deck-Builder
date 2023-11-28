@@ -2,7 +2,7 @@
 
 import getUserDecks from "@/actions/getUserDecks";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import DeckBox from "@/components/DeckBox";
+import DeckBox from "@/components/deck/DeckBox";
 import { Deck } from "@/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

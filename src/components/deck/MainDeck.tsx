@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import AddCardBtn from "./AddCardBtn";
-import AddToDeckModal from "./AddToDeckModal";
+import AddCardBtn from "../AddCardBtn";
+import AddToDeckModal from "../AddToDeckModal";
 import { DeckProps, YugiCards } from "@/types";
-import YugiCard from "./YugiCard";
-import useDeckContext from "@/app/context/DeckContext";
+import YugiCard from "../YugiCard";
+import useDeckContext from "@/context/DeckContext";
 
 export default function MainDeck({ allCards }: DeckProps) {
   const [isOpen, setIsOpen] = useState(false);

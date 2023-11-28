@@ -1,6 +1,6 @@
 "use client";
 
-import useDeckContext from "@/app/context/DeckContext";
+import useDeckContext from "@/context/DeckContext";
 import { FaMinusCircle } from "react-icons/fa";
 
 export default function RemoveCardBtn({

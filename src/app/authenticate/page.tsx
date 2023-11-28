@@ -1,6 +1,6 @@
 "use server";
 
-import Auth from "@/components/Auth";
+import Auth from "@/components/auth/Auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";

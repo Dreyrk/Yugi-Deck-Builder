@@ -4,8 +4,8 @@ import { YugiCards } from "@/types";
 import ExtraDeck from "./ExtraDeck";
 import MainDeck from "./MainDeck";
 import SideDeck from "./SideDeck";
-import useDeckContext from "@/app/context/DeckContext";
-import CreateDeckBtn from "./CreateDeckBtn";
+import useDeckContext from "@/context/DeckContext";
+import CreateDeckBtn from "../CreateDeckBtn";
 import { GrPowerReset } from "react-icons/gr";
 import getDeckLength from "@/utils/getDeckLength";
 

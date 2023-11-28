@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import { AuthProps, User } from "@/types";
+import { AuthProps, AuthUser } from "@/types";
 import { toast } from "react-toastify";
-import authFetcher from "../utils/authFetcher";
-import Loader from "./Loader";
-import FormInput from "./FormInput";
+import authFetcher from "../../utils/authFetcher";
+import Loader from "../Loader";
+import FormInput from "../FormInput";
 
 export default function Register({ setRegistered }: AuthProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [checkedPassword, setCheckedPassword] = useState<string>("");
-  const [newUser, setNewUser] = useState<User>({
+  const [newUser, setNewUser] = useState<AuthUser>({
     pseudo: "",
     email: "",
     password: "",

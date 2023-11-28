@@ -1,7 +1,7 @@
 import { Deck } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import DeleteDeckBtn from "./DeleteDeckBtn";
+import DeleteDeckBtn from "../DeleteDeckBtn";
 import deleteUserDeck from "@/actions/deleteUserDeck";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -13,7 +13,6 @@ export default function DeckBox({
   deck: Deck;
   userId: string;
 }) {
-  const currPathname = headers().get("next-url");
   const deckCover = deck.extra[0] ? deck.extra[0].img : deck.main[0].img;
   const deleteDeck = async () => {
     "use server";
