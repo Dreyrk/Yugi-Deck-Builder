@@ -16,7 +16,7 @@ export interface YugiCards {
 }
 
 export interface Deck {
-  _id?: string;
+  id: any;
   name: string;
   main: YugiCards[];
   extra: YugiCards[];
@@ -25,10 +25,11 @@ export interface Deck {
 
 export interface YugiCardProps {
   card: YugiCards;
+  trigger?: boolean;
   inDeck?: boolean;
   deckType?: string;
   selectedCards?: YugiCards[];
-  setSelectedCards?: (s: any) => void;
+  setSelectedCards?: any;
 }
 
 export interface DeckProps {
@@ -66,12 +67,19 @@ export interface FormInputProps {
   type: string;
 }
 
-export interface User {
-  _id?: string;
-  id?: string;
+export type AuthUser = {
   pseudo?: string;
   email: string;
+  password: string;
+};
+
+export interface User {
+  _id?: string;
+  id: string;
+  pseudo: string;
+  email: string;
   password?: string;
+  decks: Deck[];
 }
 
 export interface AnimatedTextProps {

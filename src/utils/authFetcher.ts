@@ -1,6 +1,6 @@
-import { User } from "@/types";
+import { AuthUser } from "@/types";
 
-export default async function authFetcher(url: string, user: User) {
+export default async function authFetcher(url: string, user: AuthUser) {
   const res = await fetch(`api/${url}`, {
     headers: {
       Accept: "application/json",

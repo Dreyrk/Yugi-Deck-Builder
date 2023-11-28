@@ -1,3 +1,5 @@
+"use server";
+
 import createCustomCards from "../utils/createCustomCards";
 
 async function getCardsById(id: string) {

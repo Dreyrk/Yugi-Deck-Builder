@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { AuthProps } from "@/types";
-import FormInput from "./FormInput";
+import { AuthProps, AuthUser } from "@/types";
+import FormInput from "../FormInput";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Login({ registered, setRegistered }: AuthProps) {
   const router = useRouter();
   const { status } = useSession();
-  const [loginUser, setLoginUser] = useState({
+  const [loginUser, setLoginUser] = useState<AuthUser>({
     email: "",
     password: "",
   });

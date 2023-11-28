@@ -1,6 +1,6 @@
 "use client";
 
-import useDeckContext from "@/app/context/DeckContext";
+import useDeckContext from "@/context/DeckContext";
 import { FaMinusCircle } from "react-icons/fa";
 
 export default function RemoveCardBtn({
@@ -17,7 +17,7 @@ export default function RemoveCardBtn({
     if (deckType === "main" || deckType === "extra" || deckType === "side") {
       dispatch({
         type: "REMOVE_CARD",
-        payload: { cardId: cardId, deckTypeToRemove: deckType },
+        payload: { count: 1, cardId: cardId, deckTypeToRemove: deckType },
       });
     } else {
       console.error("no deck type in remove btn");
