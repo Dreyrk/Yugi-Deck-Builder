@@ -4,12 +4,18 @@ import { YugiCards } from "@/types";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
-export default function AnimatedYugiCard({ card }: { card: YugiCards }) {
+export default function AnimatedYugiCard({
+  card,
+  style,
+}: {
+  card: YugiCards;
+  style: string;
+}) {
   const x = useMotionValue(240);
   const y = useMotionValue(200);
 
-  const rotateX = useTransform(y, [0, 480], [30, -30]);
-  const rotateY = useTransform(x, [0, 400], [-30, 30]);
+  const rotateX = useTransform(y, [0, 480], [40, -40]);
+  const rotateY = useTransform(x, [0, 400], [-40, 40]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -24,7 +30,7 @@ export default function AnimatedYugiCard({ card }: { card: YugiCards }) {
 
   return (
     <motion.div
-      className="mouseContainer"
+      className={`mouseContainer ${style ? style : ""}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={resetPosition}>
       <motion.div
@@ -33,7 +39,8 @@ export default function AnimatedYugiCard({ card }: { card: YugiCards }) {
           width: 180,
           rotateY,
           rotateX,
-          perspective: 600,
+          perspective: 500,
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         }}
         transition={{ duration: 0.5 }}>
         <Image
