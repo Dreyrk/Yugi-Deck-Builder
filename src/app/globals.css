@@ -17,6 +17,17 @@
   }
 }
 
+.mouseContainer {
+  position: relative;
+  border-radius: 15px;
+  background-color: #202020;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  width: 400px;
+  height: 480px;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;

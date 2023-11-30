@@ -3,29 +3,47 @@
 import { YugiCards } from "@/types";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import useMousePosition from "@/hooks/useMousePosition";
-import { useRef } from "react";
 
 export default function AnimatedYugiCard({ card }: { card: YugiCards }) {
-  const ref = useRef(null);
-  const { x, y } = useMousePosition(ref);
+  const x = useMotionValue(240);
+  const y = useMotionValue(200);
 
-  const rotateX = y / 15;
-  const rotateY = x / 15;
+  const rotateX = useTransform(y, [0, 480], [30, -30]);
+  const rotateY = useTransform(x, [0, 400], [-30, 30]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left);
+    y.set(e.clientY - rect.top);
+  };
+
+  const resetPosition = () => {
+    x.set(240);
+    y.set(200);
+  };
 
   return (
     <motion.div
-      ref={ref}
-      style={{ rotateX, rotateY, perspective: 2000 }}
-      transition={{ duration: 0.5 }}
-      className="h-fit w-fit">
-      <Image
-        className="z-40"
-        src={card.img ? card.img : "/cardBack.jpg"}
-        alt="card"
-        width={180}
-        height={260}
-      />
+      className="mouseContainer"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={resetPosition}>
+      <motion.div
+        style={{
+          height: 260,
+          width: 180,
+          rotateY,
+          rotateX,
+          perspective: 600,
+        }}
+        transition={{ duration: 0.5 }}>
+        <Image
+          className="z-40"
+          src={card.img ? card.img : "/cardBack.jpg"}
+          alt="card"
+          width={180}
+          height={260}
+        />
+      </motion.div>
     </motion.div>
   );
 }
