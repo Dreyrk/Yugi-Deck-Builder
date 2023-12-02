@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["images.ygoprodeck.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.ygoprodeck.com",
+      },
+    ],
   },
   modularizeImports: {
     "react-icons": {

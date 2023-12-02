@@ -13,13 +13,13 @@ export default async function Home() {
   ]);
 
   return (
-    <main>
+    <>
       <AnimatedText text="Build your own Deck !" />
       <DeckBuilder
         mainCards={mainCards}
         extraCards={extraCards}
         sideCards={sideCards}
       />
-    </main>
+    </>
   );
 }
