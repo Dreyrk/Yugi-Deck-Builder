@@ -122,3 +122,10 @@ export interface FetchedCards {
   }[];
   card_prices: CardPrices[];
 }
+
+export interface FavoriteBtnProps {
+  size?: number;
+  color?: string;
+  like: () => void;
+  unlike: () => void;
+}

@@ -17,6 +17,11 @@
   }
 }
 
+.details-item {
+  text-align: center;
+  flex-basis: 50%;
+}
+
 .mouseContainer {
   position: relative;
   border-radius: 15px;
