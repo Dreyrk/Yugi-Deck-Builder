@@ -34,7 +34,7 @@ export default function YugiCard({
     <button
       onClick={selectCard}
       type="button"
-      className="relative lg:hover:scale-125">
+      className="relative hover:scale-95">
       {inDeck && deckType && (
         <RemoveCardBtn deckType={deckType} cardId={card.id} />
       )}

@@ -4,6 +4,7 @@ import { connect } from "@/lib/dbConnection";
 import Users from "@/models/usersModel";
 import { Deck } from "@/types";
 import isDeckValid from "@/utils/isDeckValid";
+import { revalidatePath } from "next/cache";
 
 async function createUserDeck(id: string, deck: Deck) {
   try {
@@ -15,6 +16,8 @@ async function createUserDeck(id: string, deck: Deck) {
       currentUser.decks.push(deck);
 
       await currentUser.save();
+
+      revalidatePath(`/profile/${id}/decks`);
     } else {
       console.error("deck is not valid");
       return null;

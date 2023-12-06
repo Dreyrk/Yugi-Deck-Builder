@@ -4,6 +4,7 @@ import { connect } from "@/lib/dbConnection";
 import Users from "@/models/usersModel";
 import { Types } from "mongoose";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 async function deleteUserDeck(userId: string, deckId: string) {

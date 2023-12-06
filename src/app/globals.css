@@ -18,8 +18,12 @@
   }
 }
 
+.layout-main {
+  min-height: 100dvh;
+}
+
 footer {
-  background-color: #000814;
+  @apply sticky bottom-0 w-full mt-5 backdrop-blur bg-transparent;
 }
 
 header {
