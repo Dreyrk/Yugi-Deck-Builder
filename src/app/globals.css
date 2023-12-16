@@ -23,7 +23,7 @@
 }
 
 footer {
-  @apply sticky bottom-0 w-full mt-5 backdrop-blur bg-transparent;
+  @apply sticky bottom-0 w-full mt-5 backdrop-blur bg-transparent border-t-2 border-black pt-6;
 }
 
 header {

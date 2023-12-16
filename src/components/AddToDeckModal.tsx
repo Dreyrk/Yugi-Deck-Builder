@@ -117,8 +117,8 @@ export default function AddToDeckModal({
             ref={listRef}
             className={`z-30 h-full w-full overflow-y-auto overflow-x-hidden grid grid-cols-2 lg:grid-cols-4 place-items-center scrollbar-${deckType}`}>
             {allCards ? (
-              displayedCards.map((card) => (
-                <li key={card.id} className="m-2">
+              displayedCards.map((card, i) => (
+                <li key={card.id + i} className="m-2">
                   <YugiCard
                     selectedCards={selectedCards}
                     setSelectedCards={setSelectedCards}

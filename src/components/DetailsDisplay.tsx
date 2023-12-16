@@ -1,14 +1,30 @@
-"use client";
+"use server";
 
-import { YugiCards } from "@/types";
 import FavoriteBtn from "@/components/buttons/FavoriteBtn";
+import addCardToFav from "@/actions/addCardToFav";
+import { DetailsDisplayProps, YugiCards } from "@/types";
+import getUserFavs from "@/actions/getUserFavs";
+import removeFavCard from "@/actions/removeFavCard";
 
-export default function DetailsDisplay({ card }: { card: YugiCards }) {
-  const addFavorite = async () => {
-    console.log("added to fav");
-  };
-  const removeFavorite = async () => {
-    console.log("remove to fav");
+export default async function DetailsDisplay({
+  card,
+  session,
+}: DetailsDisplayProps) {
+  const favs = await getUserFavs(session?.user.id);
+
+  const isFav =
+    favs !== null ? favs.some((el: YugiCards) => el.id === card.id) : false;
+  const editFav = async () => {
+    "use server";
+    console.log(
+      isFav,
+      favs.some((el: YugiCards) => el.id === card.id)
+    );
+    if (isFav) {
+      await removeFavCard(session?.user.id, card);
+    } else {
+      await addCardToFav(session?.user.id, card);
+    }
   };
 
   return (
@@ -16,19 +32,27 @@ export default function DetailsDisplay({ card }: { card: YugiCards }) {
       <h2 className="text-2xl text-center basis-full underline h-12">
         Details
       </h2>
-      <li className="details-item">
-        ATK : <span className="font-semibold text-xl">{card.atk}</span>
-      </li>
-      <li className="details-item">
-        DEF : <span className="font-semibold text-xl">{card.def}</span>
-      </li>
-      <li className="details-item">
-        Level : <span className="font-semibold text-xl">{card.level}</span>
-      </li>
-      <li className="details-item">
-        Attribute :
-        <span className="font-semibold text-xl mx-1">{card.attribute}</span>
-      </li>
+      {card.atk && (
+        <li className="details-item">
+          ATK : <span className="font-semibold text-xl">{card.atk}</span>
+        </li>
+      )}
+      {card.def && (
+        <li className="details-item">
+          DEF : <span className="font-semibold text-xl">{card.def}</span>
+        </li>
+      )}
+      {card.level && (
+        <li className="details-item">
+          Level : <span className="font-semibold text-xl">{card.level}</span>
+        </li>
+      )}
+      {card.attribute && (
+        <li className="details-item">
+          Attribute :
+          <span className="font-semibold text-xl mx-1">{card.attribute}</span>
+        </li>
+      )}
       <li className="basis-full p-2 overflow-hidden">
         [
         <span className="font-semibold mx-1">
@@ -42,13 +66,9 @@ export default function DetailsDisplay({ card }: { card: YugiCards }) {
       <li className="details-item">
         Price :<span className="font-semibold text-xl mx-1">${card.price}</span>
       </li>
-      <li className="details-item">
-        <FavoriteBtn
-          like={addFavorite}
-          unlike={removeFavorite}
-          color={"#ffee32"}
-        />
-      </li>
+      <form action={editFav} className="details-item">
+        <FavoriteBtn fav={isFav} type="submit" color={"#ffee32"} />
+      </form>
     </ul>
   );
 }

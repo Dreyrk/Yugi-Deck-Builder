@@ -4,7 +4,7 @@ import Link from "next/link";
 import DeleteDeckBtn from "../DeleteDeckBtn";
 import deleteUserDeck from "@/actions/deleteUserDeck";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function DeckBox({
   deck,
@@ -13,18 +13,20 @@ export default function DeckBox({
   deck: Deck;
   userId: string;
 }) {
-  const deckCover = deck.extra[0] ? deck.extra[0].img : deck.main[0].img;
+  const deckCover = Boolean(deck.extra[0])
+    ? deck.extra[0].img
+    : deck.main[0].img;
+
   const deleteDeck = async () => {
     "use server";
     await deleteUserDeck(userId, deck.id);
-    revalidatePath(`/profile/${userId}/decks`);
+    revalidatePath("/profile/[userId]/decks");
+    redirect("/");
   };
   return (
     <div className="relative">
-      <form
-        className="absolute top-1 right-1 p-2 rounded-sm backdrop-blur"
-        action={deleteDeck}>
-        <DeleteDeckBtn />
+      <form className="absolute top-1 right-1" action={deleteDeck}>
+        <DeleteDeckBtn type="button" />
       </form>
       <Link href={`decks/${deck.id}`}>
         <div className="h-full w-60 bg-slate-200 flex flex-col items-center z-0">

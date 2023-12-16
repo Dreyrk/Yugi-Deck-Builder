@@ -1,3 +1,4 @@
+import { Session } from "next-auth";
 import { IconType } from "react-icons";
 
 export interface YugiCards {
@@ -126,6 +127,13 @@ export interface FetchedCards {
 export interface FavoriteBtnProps {
   size?: number;
   color?: string;
-  like: () => void;
-  unlike: () => void;
+  like?: (session: Session | null) => void;
+  unlike?: () => void;
+  fav: boolean;
+  type: "button" | "submit" | "reset";
+}
+
+export interface DetailsDisplayProps {
+  card: YugiCards;
+  session: Session | null;
 }

@@ -46,6 +46,7 @@ const userSchema = new Schema(
       required: [true, "Please provide a password"],
     },
     decks: [DeckSchema],
+    favs: [CardSchema],
   },
   {
     timestamps: true,

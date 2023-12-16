@@ -38,7 +38,7 @@ export default async function RootLayout({
         />
         <Providers session={session}>
           <Navbar />
-          <main className="overflow-hidden pt-36 px-2 layout-main">
+          <main className="overflow-hidden pt-24 px-2 layout-main">
             <Suspense fallback={<Loader />}>{children}</Suspense>
           </main>
           <Footer />

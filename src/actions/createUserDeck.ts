@@ -16,8 +16,6 @@ async function createUserDeck(id: string, deck: Deck) {
       currentUser.decks.push(deck);
 
       await currentUser.save();
-
-      revalidatePath(`/profile/${id}/decks`);
     } else {
       console.error("deck is not valid");
       return null;
@@ -25,6 +23,7 @@ async function createUserDeck(id: string, deck: Deck) {
   } catch (e: any) {
     throw new Error(`failed to create deck ${e.message}`);
   }
+  revalidatePath("/profile/[userId]/decks", "page");
 }
 
 export default createUserDeck;

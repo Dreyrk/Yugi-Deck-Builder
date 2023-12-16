@@ -24,8 +24,6 @@ export default function CreateDeckBtn() {
       if (res.ok) {
         dispatch({ type: "RESET" });
         toast.success("Deck Created !");
-        ("use server");
-        revalidatePath(`/profile/${session?.user.id}/decks`, "page");
       }
     }
   };
