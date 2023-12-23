@@ -4,7 +4,7 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { AddToDeckModalProps, YugiCards } from "@/types";
 import { motion } from "framer-motion";
 import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
-import YugiCard from "./YugiCard";
+import YugiCard from "./cards/YugiCard";
 import useDeckContext from "@/context/DeckContext";
 import Loader from "./Loader";
 
@@ -117,8 +117,8 @@ export default function AddToDeckModal({
             ref={listRef}
             className={`z-30 h-full w-full overflow-y-auto overflow-x-hidden grid grid-cols-2 lg:grid-cols-4 place-items-center scrollbar-${deckType}`}>
             {allCards ? (
-              displayedCards.map((card) => (
-                <li key={card.id} className="m-2">
+              displayedCards.map((card, i) => (
+                <li key={card.id + i} className="m-2">
                   <YugiCard
                     selectedCards={selectedCards}
                     setSelectedCards={setSelectedCards}

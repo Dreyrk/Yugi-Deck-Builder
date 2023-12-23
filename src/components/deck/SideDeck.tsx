@@ -4,7 +4,7 @@ import { useState } from "react";
 import AddCardBtn from "../AddCardBtn";
 import AddToDeckModal from "../AddToDeckModal";
 import { DeckProps, YugiCards } from "@/types";
-import YugiCard from "../YugiCard";
+import YugiCard from "../cards/YugiCard";
 import useDeckContext from "@/context/DeckContext";
 
 export default function SideDeck({ allCards }: DeckProps) {

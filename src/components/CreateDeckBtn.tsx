@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import useDeckContext from "@/context/DeckContext";
 import isDeckValid from "@/utils/isDeckValid";
 import { toast } from "react-toastify";
+import { revalidatePath } from "next/cache";
 
 export default function CreateDeckBtn() {
   const { data: session, status } = useSession();

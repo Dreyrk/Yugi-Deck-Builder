@@ -7,6 +7,7 @@
   --deck-extra: #5b21b6;
   --deck-side: #15803d;
   background-color: #000814;
+  background: url(../../public/background-repeat.jpeg);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,6 +16,34 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+.layout-main {
+  min-height: 100dvh;
+}
+
+footer {
+  @apply sticky bottom-0 w-full mt-5 backdrop-blur bg-transparent border-t-2 border-black pt-2;
+}
+
+header {
+  @apply backdrop-blur border-b-2 border-b-black shadow;
+}
+
+.details-item {
+  text-align: center;
+  flex-basis: 50%;
+}
+
+.mouseContainer {
+  position: relative;
+  border-radius: 15px;
+  background-color: #202020;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  width: 400px;
+  height: 480px;
 }
 
 .modal-overlay {

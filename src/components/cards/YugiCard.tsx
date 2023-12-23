@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { YugiCardProps, YugiCards } from "@/types";
 import Image from "next/image";
-import RemoveCardBtn from "./RemoveCardBtn";
+import RemoveCardBtn from "../RemoveCardBtn";
 import countCards from "@/utils/countCards";
 
 export default function YugiCard({
@@ -34,7 +34,7 @@ export default function YugiCard({
     <button
       onClick={selectCard}
       type="button"
-      className="relative lg:hover:scale-125">
+      className="relative hover:scale-95">
       {inDeck && deckType && (
         <RemoveCardBtn deckType={deckType} cardId={card.id} />
       )}

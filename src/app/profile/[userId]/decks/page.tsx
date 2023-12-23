@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { userId: string } }) {
 
   if (session?.user.id === userId) {
     return (
-      <div className="px-8">
+      <div className="px-8 pt-8">
         <h1 className="text-3xl font-semibold text-slate-100 underline">
           Decks :
         </h1>
