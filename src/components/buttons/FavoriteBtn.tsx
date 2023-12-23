@@ -5,12 +5,13 @@ import { MdFavoriteBorder } from "react-icons/md";
 export default function FavoriteBtn({
   size = 40,
   color,
-  type = "button",
-  fav = false,
+  type,
+  isFav,
+  like,
 }: FavoriteBtnProps) {
   return (
-    <button type={type}>
-      {fav ? (
+    <button onClick={like} type={type}>
+      {isFav ? (
         <MdFavorite size={size} color={color} />
       ) : (
         <MdFavoriteBorder size={size} />

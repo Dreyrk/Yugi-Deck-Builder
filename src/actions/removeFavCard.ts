@@ -14,9 +14,7 @@ async function removeFavCard(userId: string, card: YugiCards) {
     currentUser.favs = currentUser.favs.filter(
       (currCard: YugiCards) => currCard.id !== card.id
     );
-
     await currentUser.save();
-    revalidatePath("/cards", "page");
   } catch (e: any) {
     throw new Error(`Failed to remove favorite card : ${e.message}`);
   }

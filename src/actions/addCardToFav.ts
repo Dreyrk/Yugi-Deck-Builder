@@ -15,8 +15,6 @@ async function addCardToFav(userId: string, card: YugiCards) {
     await currentUser.favs.push(card);
 
     await currentUser.save();
-
-    revalidatePath("/cards", "page");
   } catch (e: any) {
     throw new Error(`Failed to add card to fav : ${e.message}`);
   }

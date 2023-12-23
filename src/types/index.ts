@@ -127,13 +127,14 @@ export interface FetchedCards {
 export interface FavoriteBtnProps {
   size?: number;
   color?: string;
-  like?: (session: Session | null) => void;
+  like?: () => void;
   unlike?: () => void;
-  fav: boolean;
+  isFav: boolean;
   type: "button" | "submit" | "reset";
 }
 
 export interface DetailsDisplayProps {
-  card: YugiCards;
   session: Session | null;
+  card: YugiCards;
+  isFav: boolean;
 }

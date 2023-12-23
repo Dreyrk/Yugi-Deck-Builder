@@ -1,29 +1,33 @@
-"use server";
+"use client";
 
+import { useState } from "react";
 import FavoriteBtn from "@/components/buttons/FavoriteBtn";
-import addCardToFav from "@/actions/addCardToFav";
-import { DetailsDisplayProps, YugiCards } from "@/types";
-import getUserFavs from "@/actions/getUserFavs";
-import removeFavCard from "@/actions/removeFavCard";
+import { DetailsDisplayProps } from "@/types";
+import { toast } from "react-toastify";
 
-export default async function DetailsDisplay({
-  card,
+export default function DetailsDisplay({
   session,
+  card,
+  isFav,
 }: DetailsDisplayProps) {
-  const favs = await getUserFavs(session?.user.id);
-
-  const isFav =
-    favs !== null ? favs.some((el: YugiCards) => el.id === card.id) : false;
-  const editFav = async () => {
-    "use server";
-    console.log(
-      isFav,
-      favs.some((el: YugiCards) => el.id === card.id)
-    );
-    if (isFav) {
-      await removeFavCard(session?.user.id, card);
-    } else {
-      await addCardToFav(session?.user.id, card);
+  const [liked, setLiked] = useState(isFav);
+  const like = async () => {
+    if (session?.user.id) {
+      const body = JSON.stringify({ card });
+      const res = await fetch(`/api/user/${session?.user.id}/favs`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+      if (res.ok) {
+        const { message, liked } = await res.json();
+        setLiked(liked);
+        toast.success(message);
+      } else {
+        toast.error("Something goes wrong...");
+      }
     }
   };
 
@@ -66,9 +70,7 @@ export default async function DetailsDisplay({
       <li className="details-item">
         Price :<span className="font-semibold text-xl mx-1">${card.price}</span>
       </li>
-      <form action={editFav} className="details-item">
-        <FavoriteBtn fav={isFav} type="submit" color={"#ffee32"} />
-      </form>
+      <FavoriteBtn like={like} isFav={liked} type="button" color={"#ffee32"} />
     </ul>
   );
 }
