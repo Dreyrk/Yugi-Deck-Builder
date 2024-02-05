@@ -5,10 +5,13 @@ import useDeckContext from "@/context/DeckContext";
 import isDeckValid from "@/utils/isDeckValid";
 import { toast } from "react-toastify";
 import { revalidatePath } from "next/cache";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function CreateDeckBtn() {
   const { data: session, status } = useSession();
   const { deck, dispatch } = useDeckContext();
+  const [getStoredDeck, setStoredDeck, deleteStoredValue] =
+    useLocalStorage("deck");
 
   const createDeck = async () => {
     const isValid = isDeckValid(deck);
@@ -23,6 +26,7 @@ export default function CreateDeckBtn() {
 
       if (res.ok) {
         dispatch({ type: "RESET" });
+        deleteStoredValue();
         toast.success("Deck Created !");
       }
     }

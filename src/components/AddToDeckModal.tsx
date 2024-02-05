@@ -7,6 +7,7 @@ import { AiOutlineCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 import YugiCard from "./cards/YugiCard";
 import useDeckContext from "@/context/DeckContext";
 import Loader from "./Loader";
+import FiltersBar from "./FiltersBar";
 
 export default function AddToDeckModal({
   setIsOpen,
@@ -84,11 +85,11 @@ export default function AddToDeckModal({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-stone-200 w-[92vw] h-[75vh] overflow-hidden lg:w-[40vw] p-4 flex flex-col justify-between rounded-sm shadow-lg z-50">
+        className="bg-stone-200 w-[92dvw] h-[85dvh] overflow-hidden lg:w-[950px] p-4 flex flex-col justify-between rounded-sm shadow-lg z-50">
         <button className="max-w-[35px]" onClick={closeModal} type="button">
           <AiOutlineCloseCircle color="black" size={30} />
         </button>
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-4">
           <p className="text-2xl px-4 text-black">
             <span
               style={{ color: `var(--deck-${deckType})` }}
@@ -97,21 +98,22 @@ export default function AddToDeckModal({
             </span>
             Deck :
           </p>
-          <button type="button" onClick={addToDeck}>
+          <button className="m-2" type="button" onClick={addToDeck}>
             <AiFillCheckCircle size={40} color="#a5be00" />
           </button>
         </div>
-        <div className="h-5/6 w-full p-2">
-          <div className="flex items-center gap-6 px-6 py-4">
-            <label htmlFor="search">Search :</label>
+        <div className="h-full w-full p-2">
+          <div className="flex flex-col items-center gap-6 px-4 py-4">
             <input
-              className="flex-grow rounded-md p-1 box-border"
+              className="w-5/6 rounded-md p-1 box-border"
               id="search"
               type="text"
+              placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               autoComplete="off"
             />
+            <FiltersBar cards={allCards} setCards={setDisplayedCards} />
           </div>
           <ul
             ref={listRef}
