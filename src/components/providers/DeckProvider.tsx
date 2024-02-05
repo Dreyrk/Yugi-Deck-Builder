@@ -45,7 +45,8 @@ export default function DeckContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [getStoredDeck, setStoredDeck] = useLocalStorage("deck");
+  const [getStoredDeck, setStoredDeck, deleteStoredValue] =
+    useLocalStorage("deck");
 
   const storedDeck = getStoredDeck();
 

@@ -12,5 +12,12 @@ export const useLocalStorage = (key: string) => {
     }
   };
 
-  return [getStoredValue, setStoredValue] as const;
+  const deleteStoredValue = () => {
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem(key);
+      return "deleted";
+    }
+  };
+
+  return [getStoredValue, setStoredValue, deleteStoredValue] as const;
 };

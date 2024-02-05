@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { Dispatch, SetStateAction } from "react";
 import { IconType } from "react-icons";
 
 export interface YugiCards {
@@ -137,4 +138,9 @@ export interface DetailsDisplayProps {
   session: Session | null;
   card: YugiCards;
   isFav: boolean;
+}
+
+export interface FiltersBarProps {
+  cards: YugiCards[];
+  setCards: Dispatch<SetStateAction<YugiCards[]>>;
 }
