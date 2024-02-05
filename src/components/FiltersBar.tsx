@@ -5,9 +5,9 @@ import { MainDeckTypes, ExtraDeckTypes } from "@/constants";
 import { useState } from "react";
 
 export default function FiltersBar({ cards, setCards }: FiltersBarProps) {
-  let selectedMainTypes = [];
+  let selectedMainTypes: any = [];
 
-  const mainDeckSelect = (e) => {
+  const mainDeckSelect = (e: any) => {
     selectedMainTypes.push(e.target.value);
     console.log(selectedMainTypes, e.target.value);
   };
