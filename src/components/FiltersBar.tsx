@@ -3,28 +3,45 @@
 import { FiltersBarProps } from "@/types";
 import { MainDeckTypes, ExtraDeckTypes } from "@/constants";
 import { useState } from "react";
+import Loader from "./Loader";
 
 export default function FiltersBar({ cards, setCards }: FiltersBarProps) {
-  let selectedMainTypes: any = [];
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const mainDeckSelect = (e: any) => {
-    selectedMainTypes.push(e.target.value);
-    console.log(selectedMainTypes, e.target.value);
+    setLoading(true);
+    if (selectedTypes.length) {
+      setSelectedTypes([...new Set([...selectedTypes, e.target.value])]);
+    } else {
+      setSelectedTypes([e.target.value]);
+    }
+    setCards(cards.filter((card) => selectedTypes.includes(card.type)));
+
+    setLoading(false);
+    return;
   };
 
   return (
-    <div className="p-4">
-      <select
-        value={selectedMainTypes.join(", ")}
-        onChange={mainDeckSelect}
-        id="main-deck-select">
-        <option value="">------Main Types------</option>
-        {MainDeckTypes.map((type, i) => (
-          <option key={i} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
+    <div className="w-full p-4">
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="flex justify-between items-center">
+          <span className="max-w-xs space-x-1">
+            <span className="font-semibold">Selected Types:</span>
+            <span>{selectedTypes.join(", ")}</span>
+          </span>
+          <select onChange={mainDeckSelect} id="deck-select">
+            <option value="">-----SELECT CARD TYPES-----</option>
+            {MainDeckTypes.map((type, i) => (
+              <option key={i} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
     </div>
   );
 }

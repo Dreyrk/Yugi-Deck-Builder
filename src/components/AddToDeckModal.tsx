@@ -9,26 +9,18 @@ import useDeckContext from "@/context/DeckContext";
 import Loader from "./Loader";
 import FiltersBar from "./FiltersBar";
 
-export default function AddToDeckModal({
-  setIsOpen,
-  deckType,
-  allCards,
-}: AddToDeckModalProps) {
+export default function AddToDeckModal({ setIsOpen, deckType, allCards }: AddToDeckModalProps) {
   const listRef = useRef<HTMLUListElement>(null);
   const { deck, dispatch } = useDeckContext();
   const [selectedCards, setSelectedCards] = useState(deck[deckType]);
-  const [displayedCards, setDisplayedCards] = useState<YugiCards[]>(
-    allCards.slice(0, 60)
-  );
+  const [displayedCards, setDisplayedCards] = useState<YugiCards[]>(allCards.slice(0, 60));
   const [visibleCardCount, setVisibleCardCount] = useState(12);
   const [search, setSearch] = useState("");
   const deferredSearch = useDeferredValue(search);
 
   useMemo(() => {
     const searchedCards = allCards
-      .filter((card) =>
-        card.name.toLowerCase().includes(deferredSearch.toLowerCase())
-      )
+      .filter((card) => card.name.toLowerCase().includes(deferredSearch.toLowerCase()))
       .slice(0, 60);
     setDisplayedCards(searchedCards);
   }, [deferredSearch, allCards]);
@@ -36,10 +28,7 @@ export default function AddToDeckModal({
   useEffect(() => {
     const list = listRef.current;
     const loadMoreCards = () => {
-      const nextBatch = displayedCards.slice(
-        visibleCardCount,
-        visibleCardCount * 4
-      );
+      const nextBatch = displayedCards.slice(visibleCardCount, visibleCardCount * 4);
       setDisplayedCards([...displayedCards, ...nextBatch]);
       setVisibleCardCount(visibleCardCount + 10);
     };
@@ -77,11 +66,10 @@ export default function AddToDeckModal({
     }
   };
 
+  console.log(allCards, displayedCards);
+
   return (
-    <motion.dialog
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="modal-overlay">
+    <motion.dialog initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="modal-overlay">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -91,9 +79,7 @@ export default function AddToDeckModal({
         </button>
         <div className="flex justify-between mt-4">
           <p className="text-2xl px-4 text-black">
-            <span
-              style={{ color: `var(--deck-${deckType})` }}
-              className={`mx-1 capitalize`}>
+            <span style={{ color: `var(--deck-${deckType})` }} className={`mx-1 capitalize`}>
               {deckType}
             </span>
             Deck :
@@ -121,11 +107,7 @@ export default function AddToDeckModal({
             {allCards ? (
               displayedCards.map((card, i) => (
                 <li key={card.id + i} className="m-2">
-                  <YugiCard
-                    selectedCards={selectedCards}
-                    setSelectedCards={setSelectedCards}
-                    card={card}
-                  />
+                  <YugiCard selectedCards={selectedCards} setSelectedCards={setSelectedCards} card={card} />
                 </li>
               ))
             ) : (
