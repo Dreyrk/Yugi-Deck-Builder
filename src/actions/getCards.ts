@@ -7,18 +7,13 @@ import { MainDeckTypes, ExtraDeckTypes } from "@/constants";
 const getUrl = (type: string) => {
   switch (type) {
     case "main":
-      return `https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${MainDeckTypes.join(
-        ","
-      )}`;
+      return `https://db.ygoprodeck.com/api/v7/cardinfo.php?language=fr&type=${MainDeckTypes.join(",")}`;
     case "extra":
-      return `https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${ExtraDeckTypes.join(
-        ","
-      )}`;
+      return `https://db.ygoprodeck.com/api/v7/cardinfo.php?language=fr&type=${ExtraDeckTypes.join(",")}`;
     case "side":
-      return `https://db.ygoprodeck.com/api/v7/cardinfo.php`;
-
+      return `https://db.ygoprodeck.com/api/v7/cardinfo.php?language=fr`;
     default:
-      return "https://db.ygoprodeck.com/api/v7/cardinfo.php";
+      return "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=fr";
   }
 };
 
